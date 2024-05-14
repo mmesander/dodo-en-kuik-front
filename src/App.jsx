@@ -2,15 +2,16 @@
 import {Route, Routes} from "react-router-dom";
 
 // Components
-import NavBar from "./components/NavBar.jsx";
+import NavBar from "./components/navbar/NavBar.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 // Pages
 import Home from "./pages/home/Home.jsx";
 import Search from "./pages/search/Search.jsx";
 import Suggestion from "./pages/suggestion/Suggestion.jsx";
 import Lists from "./pages/lists/Lists.jsx";
-import Profile from "./pages/profile/Profile.jsx";
 
+import Profile from "./pages/profile/Profile.jsx";
 // Styles
 import './App.css'
 
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/lists" element={<Lists/>}/>
                 <Route path="/profile" element={<Profile/>}/>
             </Routes>
+            <Footer/>
         </>
     );
 }

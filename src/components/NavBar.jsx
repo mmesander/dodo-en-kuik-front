@@ -30,7 +30,7 @@ function NavBar() {
                         to="/search"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
-                        Search
+                        Zoeken
                     </NavLink>
                 </li>
                 <li>
@@ -38,7 +38,7 @@ function NavBar() {
                         to="/suggestion"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
-                        Suggestion
+                        Suggestie
                     </NavLink>
                 </li>
                 <li>
@@ -46,7 +46,7 @@ function NavBar() {
                         to="/lists"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
-                        Lists
+                        Lijsten
                     </NavLink>
                 </li>
                 <li>
@@ -54,8 +54,16 @@ function NavBar() {
                         to="/profile"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
-                        Profile
+                        Profiel
                     </NavLink>
+                </li>
+                <li>
+                    <button
+                        type="button"
+                        className="nav-logout-button"
+                    >
+                        Uitloggen
+                    </button>
                 </li>
             </ul>
         </nav>

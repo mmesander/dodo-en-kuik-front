@@ -11,10 +11,12 @@ import "./NavBar.css";
 function NavBar() {
     return (
         <nav className="navbar-outer-container">
-                <span className="logo-container">
+            <NavLink to="/">
+                 <span className="logo-container">
                     <img src={logo} alt="Dodo & Kuik app logo"/>
                     <h3>Dodo & Kuik</h3>
                 </span>
+            </NavLink>
 
             <ul>
                 <li>

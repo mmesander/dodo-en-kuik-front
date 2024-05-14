@@ -1,6 +1,9 @@
 # Personal
 /.idea
 
+# API
+.env
+
 # Logs
 logs
 *.log

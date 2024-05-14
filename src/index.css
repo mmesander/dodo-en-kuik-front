@@ -26,6 +26,7 @@ code {
     --main-theme-color-black: black;
     --main-theme-color-grey: grey;
     --button-color-red: #FFC0CB;
+    --main-error-color-red: red;
     --icon-filter-color-mint: invert(90%) sepia(18%) saturate(587%) hue-rotate(76deg) brightness(98%) contrast(87%);
     --icon-filter-color-red: invert(48%) sepia(50%) saturate(7135%) hue-rotate(340deg) brightness(100%) contrast(94%);
     --icon-filter-color-blue: invert(33%) sepia(48%) saturate(3863%) hue-rotate(223deg) brightness(103%) contrast(90%);

@@ -3,7 +3,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 
 // Assets
-import logo from "../assets/icons/dek-logo.png"
+import logo from "../../assets/icons/dek-logo.png"
 
 // Styles
 import "./NavBar.css";

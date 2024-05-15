@@ -1,0 +1,29 @@
+.button-set-page-section button {
+    padding: 5px;
+    color: var(--main-theme-color-white);
+    background-color: var(--main-theme-color-pink);
+    border-radius: 4px;
+    border: 2px solid var(--main-theme-color-black);
+    font-weight: bold;
+}
+
+.button-set-page-section button:hover {
+    color: var(--main-theme-color-mint);
+}
+
+.button-set-page-section button + button {
+    margin-left: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.button-set-page-section button:disabled {
+    background-color: var(--main-theme-color-grey);
+    cursor: not-allowed;
+}
+
+.button-set-page-section button:disabled:hover {
+    color: var(--main-theme-color-white);
+}

@@ -1,0 +1,73 @@
+.movie-card-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 160px;
+    height: 375px;
+    max-width: 175px;
+    justify-content: space-between;
+    background-color: var(--main-theme-color-white);
+    border-radius: 10px 10px 7px 7px
+}
+
+.movie-card-header-section {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    justify-content: space-between;
+}
+
+.movie-card-header-section img {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+.movie-card-rating span {
+    color: var(--main-theme-color-pink);
+    font-weight: bold;
+}
+
+.movie-card-container-button {
+    margin: 5px 10px;
+    border: 3px solid var(--main-bg-color);
+    text-align: left;
+    border-radius: 10px 10px 7px 7px;
+}
+
+.movie-card-container-button h3,
+.movie-card-container-button h4 {
+    margin: 5px;
+}
+
+.movie-card-container-button:hover {
+    border: 3px solid var(--main-theme-color-pink);
+    cursor: pointer;
+}
+
+.icons-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: right;
+    gap: 2px;
+    padding: 0 5px 2px 0;
+}
+
+.active-favorite-icon,
+.active-watchlist-icon,
+.active-watched-icon {
+    background-color: var(--main-theme-color-white);
+}
+
+.active-favorite-icon img {
+    filter: var(--icon-filter-color-blue);
+}
+
+.active-watchlist-icon img {
+    filter: var(--icon-filter-color-red);
+}
+
+.active-watched-icon img {
+    filter: var(--icon-filter-color-green);
+}

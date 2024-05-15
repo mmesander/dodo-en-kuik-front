@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #171517;
+    background-color: var(--main-bg-color);
     min-height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -25,6 +25,7 @@ code {
     --main-theme-color-white: white;
     --main-theme-color-black: black;
     --main-theme-color-grey: grey;
+    --main-bg-color: #171517;
     --button-color-red: #FFC0CB;
     --main-error-color-red: red;
     --icon-filter-color-mint: invert(90%) sepia(18%) saturate(587%) hue-rotate(76deg) brightness(98%) contrast(87%);

@@ -199,8 +199,7 @@ function Home() {
                 </Button>
             </div>
         </>
-    )
-        ;
+    );
 }
 
 export default Home;

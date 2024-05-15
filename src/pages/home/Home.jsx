@@ -139,7 +139,7 @@ function Home() {
                     })}
                 </div>
                 <Button
-                    buttonType="button"
+                    type="button"
                     children={moreMovies ? "Laat minder resultaten zien" : "Laat meer resultaten zien"}
                     name={moreMovies ? "active-home-results-button" : "inactive-home-results-button"}
                     clickHandler={handleClickMovies}
@@ -151,13 +151,13 @@ function Home() {
                 </div>
                 {moreSeries && <div className="button-set-page-section">
                     <Button
-                        buttonType="button"
+                        type="button"
                         children="Vorige"
                         clickHandler={() => setSeriesPage(seriesPage - 1)}
                         disabled={seriesPage === 1}
                     />
                     <Button
-                        buttonType="button"
+                        type="button"
                         children="Volgende"
                         clickHandler={() => setSeriesPage(seriesPage + 1)}
                         disabled={seriesPage === totalSeriesPages}
@@ -186,7 +186,7 @@ function Home() {
                     })}
                 </div>
                 <Button
-                    buttonType="button"
+                    type="button"
                     children={moreSeries ? "Laat minder resultaten zien" : "Laat meer resultaten zien"}
                     name={moreSeries ? "active-home-results-button" : "inactive-home-results-button"}
                     clickHandler={handleClickSeries}

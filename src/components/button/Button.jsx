@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 import "./Button.css";
 
 Button.propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     type: PropTypes.string.isRequired,
     clickHandler: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
-    disabled: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
     id: PropTypes.string
 }
 

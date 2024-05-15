@@ -1,5 +1,5 @@
 // Functions
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 // Components
@@ -102,16 +102,18 @@ function Home() {
                 {moreMovies && <div className="button-set-page-section">
                     <Button
                         type="button"
-                        children="Vorige"
                         clickHandler={() => setMoviePage(moviePage - 1)}
                         disabled={moviePage === 1}
-                    />
+                    >
+                        Vorige
+                    </Button>
                     <Button
                         type="button"
-                        children="Volgende"
                         clickHandler={() => setMoviePage(moviePage + 1)}
                         disabled={moviePage === totalMoviePages}
-                    />
+                    >
+                        Volgende
+                    </Button>
                 </div>}
 
                 <div className="home-inner-container">
@@ -140,10 +142,11 @@ function Home() {
                 </div>
                 <Button
                     type="button"
-                    children={moreMovies ? "Laat minder resultaten zien" : "Laat meer resultaten zien"}
                     name={moreMovies ? "active-home-results-button" : "inactive-home-results-button"}
                     clickHandler={handleClickMovies}
-                />
+                >
+                    {moreMovies ? "Laat minder films zien" : "Laat meer films zien"}
+                </Button>
                 <h1 className="home-titles">Trending Series</h1>
                 <div className="loading-error-section">
                     {loading && <h3 className="loading-message">Laden... </h3>}
@@ -152,16 +155,18 @@ function Home() {
                 {moreSeries && <div className="button-set-page-section">
                     <Button
                         type="button"
-                        children="Vorige"
                         clickHandler={() => setSeriesPage(seriesPage - 1)}
                         disabled={seriesPage === 1}
-                    />
+                    >
+                        Vorige
+                    </Button>
                     <Button
                         type="button"
-                        children="Volgende"
                         clickHandler={() => setSeriesPage(seriesPage + 1)}
                         disabled={seriesPage === totalSeriesPages}
-                    />
+                    >
+                        Volgende
+                    </Button>
                 </div>}
                 <div className="home-inner-container">
                     {!moreSeries && Object.keys(series).length > 0 && series.slice(0, 5).map((tv) => {
@@ -187,10 +192,11 @@ function Home() {
                 </div>
                 <Button
                     type="button"
-                    children={moreSeries ? "Laat minder resultaten zien" : "Laat meer resultaten zien"}
                     name={moreSeries ? "active-home-results-button" : "inactive-home-results-button"}
                     clickHandler={handleClickSeries}
-                />
+                >
+                    {moreSeries ? "Laat minder series zien" : "Laat meer series zien"}
+                </Button>
             </div>
         </>
     )

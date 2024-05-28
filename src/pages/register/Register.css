@@ -15,10 +15,92 @@
     display: flex;
     flex-direction: column;
     background-color: var(--field-bg-color);
-    flex-basis: 400px;
-    width: 400px;
+    flex-basis: 600px;
+    width: 450px;
     border-radius: 10px;
-    padding: 40px;
+    padding: 20px 40px 30px 40px;
     align-items: center;
     position: relative;
+}
+
+.register-inner-container h1 {
+    margin-bottom: 20px;
+    color: var(--main-theme-color-white);
+    font-size: 40px;
+}
+
+.register-inner-container label {
+    color: var(--main-theme-color-white);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.register-inner-container input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 9px 8px;
+    margin: 2px 0;
+    border: 2px solid transparent;
+}
+
+.input-error-message {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    min-height: 20px;
+    color: var(--field-error-message)
+}
+
+.register-inner-container button {
+    background-color: var(--main-theme-color-mint);
+    color: var(--main-theme-color-white);
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.register-inner-container button:hover {
+    cursor: pointer;
+    color: var(--main-theme-color-black);
+}
+
+.register-inner-container input:focus {
+    outline: 2px solid var(--main-theme-color-mint);
+}
+
+.register-inner-container button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+    color: var(--main-theme-color-white);
+}
+
+.register-inner-container p {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--field-error-message)
+}
+
+.register-inner-container h3 {
+    color: var(--main-theme-color-white);
+    position: absolute;
+    bottom: -25px;
+    left: 5px;
+}
+
+.register-inner-container a,
+.register-inner-container a:visited {
+    color: var(--main-theme-color-pink);
+}
+
+.register-inner-container a:hover {
+    color: var(--main-theme-color-mint);
+}
+
+.succes-message {
+    color: var(--main-theme-color-green);
 }

@@ -22,7 +22,7 @@ function Register() {
     useEffect(() => {
         if (registrationSuccess) {
             const timer = setTimeout(() => {
-                navigate("/");
+                navigate("/login");
             }, 3000);
 
             return () => clearTimeout(timer);
@@ -143,6 +143,7 @@ function Register() {
                             Registratie is gelukt, je wordt in 3 seconden teruggeleid naar de login pagina
                         </h4>}
                     </form>
+                    <h3>Terug naar de <Link to="/login">login pagina</Link></h3>
                 </div>
             </div>
         </>

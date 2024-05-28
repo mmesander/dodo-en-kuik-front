@@ -29,7 +29,7 @@ function NavBar() {
                 </li>
                 <li>
                     <NavLink
-                        to="/search"
+                        to="/zoeken"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
                         Zoeken
@@ -37,7 +37,7 @@ function NavBar() {
                 </li>
                 <li>
                     <NavLink
-                        to="/suggestion"
+                        to="/suggestie"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
                         Suggestie
@@ -45,7 +45,7 @@ function NavBar() {
                 </li>
                 <li>
                     <NavLink
-                        to="/lists"
+                        to="/lijsten"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
                         Lijsten
@@ -53,7 +53,7 @@ function NavBar() {
                 </li>
                 <li>
                     <NavLink
-                        to="/profile"
+                        to="/profiel"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
                         Profiel

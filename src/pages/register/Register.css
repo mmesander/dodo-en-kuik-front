@@ -1,0 +1,24 @@
+.register-outer-container {
+    background-image: url("../../assets/images/Unicorn.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-inner-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--field-bg-color);
+    flex-basis: 400px;
+    width: 400px;
+    border-radius: 10px;
+    padding: 40px;
+    align-items: center;
+    position: relative;
+}

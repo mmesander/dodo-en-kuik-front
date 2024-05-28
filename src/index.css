@@ -25,7 +25,12 @@ code {
     --main-theme-color-white: white;
     --main-theme-color-black: black;
     --main-theme-color-grey: grey;
+    --main-theme-color-green: #006400;
+
     --main-bg-color: #171517;
+    --field-bg-color: rgba(234, 167, 214, 0.75);
+    --field-error-message: #750000;
+
     --button-color-red: #FFC0CB;
     --main-error-color-red: red;
     --icon-filter-color-mint: invert(90%) sepia(18%) saturate(587%) hue-rotate(76deg) brightness(98%) contrast(87%);

@@ -11,7 +11,8 @@ import Search from "./pages/search/Search.jsx";
 import Suggestion from "./pages/suggestion/Suggestion.jsx";
 import Lists from "./pages/lists/Lists.jsx";
 import Profile from "./pages/profile/Profile.jsx";
-import Register from "./pages/register/Register.jsx";
+import SignUp from "./pages/signup/SignUp.jsx";
+import SignIn from "./pages/signin/SignIn.jsx";
 
 // Styles
 import './App.css'
@@ -27,7 +28,8 @@ function App() {
                 <Route path="/suggestie" element={<Suggestion/>}/>
                 <Route path="/lijsten" element={<Lists/>}/>
                 <Route path="/profiel" element={<Profile/>}/>
-                <Route path="/registreren" element={<Register/>}/>
+                <Route path="/registreren" element={<SignUp/>}/>
+                <Route path="/login" element={<SignIn/>}/>
             </Routes>
             {/*<Footer/>*/}
         </>

@@ -1,5 +1,5 @@
 // Functions
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import {useForm} from "react-hook-form";
 import axios from "axios";
@@ -8,9 +8,9 @@ import axios from "axios";
 import InputHookForm from "../../components/inputhookform/InputHookForm.jsx";
 
 // Styles
-import "./Register.css"
+import "./SignUp.css"
 
-function Register() {
+function SignUp() {
     const navigate = useNavigate();
     const {handleSubmit, register, watch, formState: {errors, isValid}} = useForm({mode: "onChange"});
 
@@ -150,4 +150,4 @@ function Register() {
     )
 }
 
-export default Register;
+export default SignUp;

@@ -43,14 +43,6 @@
     border: 2px solid transparent;
 }
 
-.input-error-message {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    min-height: 20px;
-    color: var(--field-error-message)
-}
-
 .register-inner-container button {
     background-color: var(--main-theme-color-mint);
     color: var(--main-theme-color-white);
@@ -81,7 +73,19 @@
 .register-inner-container p {
     font-size: 15px;
     font-weight: bold;
+}
+
+.input-error-message {
+    font-size: 15px;
+    font-weight: bold;
     margin-bottom: 10px;
+    min-height: 20px;
+    color: var(--field-error-message)
+}
+
+.backend-error-message {
+    font-size: 15px;
+    font-weight: bold;
     color: var(--field-error-message)
 }
 

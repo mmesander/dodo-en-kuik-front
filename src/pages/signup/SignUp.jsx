@@ -49,7 +49,6 @@ function SignUp() {
         } catch (e) {
             console.error(e);
             setError(true);
-            console.log(e.response.data)
             setErrorMessage(e.response.data);
         }
         setLoading(false);
@@ -137,7 +136,7 @@ function SignUp() {
                         >
                             Registreren
                         </button>
-                        {loading ? <p>Aan het laden...</p> : <p>{errorMessage}</p>}
+                        {loading ? <p>Aan het laden...</p> : <p className="backend-error-message">{errorMessage}</p>}
                         {registrationSuccess && !error &&
                         <h4 className="succes-message">
                             Registratie is gelukt, je wordt in 3 seconden teruggeleid naar de login pagina

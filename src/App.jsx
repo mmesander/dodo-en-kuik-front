@@ -1,6 +1,9 @@
 // Functions
 import {Route, Routes} from "react-router-dom";
 
+// Context
+import {AuthContext} from "./context/AuthContext.jsx";
+
 // Components
 import NavBar from "./components/navbar/NavBar.jsx";
 import Footer from "./components/footer/Footer.jsx";
@@ -16,12 +19,14 @@ import SignIn from "./pages/signin/SignIn.jsx";
 
 // Styles
 import './App.css'
+import {useContext} from "react";
 
 function App() {
+    const {isAuth} = useContext(AuthContext);
 
     return (
         <>
-            {/*<NavBar/>*/}
+            {isAuth && <NavBar/>}
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/zoeken" element={<Search/>}/>
@@ -31,7 +36,7 @@ function App() {
                 <Route path="/registreren" element={<SignUp/>}/>
                 <Route path="/login" element={<SignIn/>}/>
             </Routes>
-            {/*<Footer/>*/}
+            {isAuth && <Footer/>}
         </>
     );
 }

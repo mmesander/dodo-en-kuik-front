@@ -40,7 +40,7 @@ function AuthContextProvider({children}) {
 
     function login(jwt_token) {
         localStorage.setItem("token", jwt_token);
-        const decodedToken = jwt_decode(jwt_token);
+        const decodedToken = jwtDecode(jwt_token);
         void fetchUserData(decodedToken.sub, jwt_token, "/");
     }
 

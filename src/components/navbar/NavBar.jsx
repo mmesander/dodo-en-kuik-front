@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {NavLink} from "react-router-dom";
 
 // Context
-// import {AuthContext} from "../../context/AuthContext.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Assets
 
@@ -12,7 +12,7 @@ import logo from "../../assets/icons/dek-logo.png"
 import "./NavBar.css";
 
 function NavBar() {
-    // const {logout} = useContext(AuthContext);
+    const {logout} = useContext(AuthContext);
 
     return (
         <nav className="navbar-outer-container">

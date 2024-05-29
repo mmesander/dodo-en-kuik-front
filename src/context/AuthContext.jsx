@@ -63,7 +63,7 @@ function AuthContextProvider({children}) {
 
     async function fetchUserData(id, token, redirectUrl) {
         try {
-            const response = await axios.get(`http://localhost:8088/users/authenticate`, {
+            const response = await axios.get(`http://localhost:8088/users/auth/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`

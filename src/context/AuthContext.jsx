@@ -53,6 +53,7 @@ function AuthContextProvider({children}) {
             user: null,
             status: 'done',
         });
+        navigate('/login');
     }
 
     const data = {
@@ -70,6 +71,8 @@ function AuthContextProvider({children}) {
                     Authorization: `Bearer ${token}`
                 }
             });
+
+            // Deze data gebruiken voor de lists context
 
             console.log(response.data);
             console.log(response.data);

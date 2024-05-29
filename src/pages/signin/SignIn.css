@@ -1,0 +1,106 @@
+.login-outer-container {
+    background-image: url("../../assets/images/Unicorn.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-inner-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--field-bg-color);
+    flex-basis: 400px;
+    width: 400px;
+    border-radius: 10px;
+    padding: 20px 40px 30px 40px;
+    align-items: center;
+    position: relative;
+}
+
+.login-inner-container h1 {
+    margin-bottom: 20px;
+    color: var(--main-theme-color-white);
+    font-size: 40px;
+}
+
+.login-inner-container label {
+    color: var(--main-theme-color-white);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.login-inner-container input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 9px 8px;
+    margin: 2px 0;
+    border: 2px solid transparent;
+}
+
+.login-inner-container button {
+    background-color: var(--main-theme-color-mint);
+    color: var(--main-theme-color-white);
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.login-inner-container button:hover {
+    cursor: pointer;
+    color: var(--main-theme-color-black);
+}
+
+.login-inner-container input:focus {
+    outline: 2px solid var(--main-theme-color-mint);
+}
+.login-inner-container button:disabled {
+    background-color: var(--main-theme-color-grey);
+    cursor: not-allowed;
+    color: var(--main-theme-color-white);
+}
+
+.login-inner-container p {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input-error-message {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    min-height: 20px;
+    color: var(--field-error-message)
+}
+
+.backend-error-message {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--field-error-message)
+}
+
+.login-inner-container h3 {
+    color: var(--main-theme-color-white);
+    position: absolute;
+    bottom: -25px;
+    left: 5px;
+}
+
+.login-inner-container a,
+.login-inner-container a:visited {
+    color: var(--main-theme-color-pink);
+}
+
+.login-inner-container a:hover {
+    color: var(--main-theme-color-mint);
+}
+

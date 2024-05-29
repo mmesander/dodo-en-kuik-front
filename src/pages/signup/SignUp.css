@@ -65,7 +65,7 @@
 }
 
 .register-inner-container button:disabled {
-    background-color: grey;
+    background-color: var(--main-theme-color-grey);
     cursor: not-allowed;
     color: var(--main-theme-color-white);
 }

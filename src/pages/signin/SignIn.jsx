@@ -95,9 +95,9 @@ function SignIn() {
                         >
                             Inloggen
                         </button>
-                        {loading ? <p>Aan het laden...</p> : <p>{errorMessage}</p>}
-
+                        {loading ? <p>Aan het laden...</p> : <p className="backend-error-message">{errorMessage}</p>}
                     </form>
+                    <h3>Nog geen account? <Link to="/registreren">Registreer je nu!</Link></h3>
                 </div>
             </div>
         </>

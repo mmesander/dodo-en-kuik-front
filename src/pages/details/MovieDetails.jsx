@@ -82,7 +82,7 @@ function MovieDetails() {
                     {error && <h3 className="error-message">Foutmelding: Er kan geen data opgehaald worden!</h3>}
                 </div>
                 <div className="details-inner-container">
-                    <section className="details-image-section">
+                    <section className="details-image-container">
                         {details.poster_path && <img
                             src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
                             alt={details.title}
@@ -92,7 +92,7 @@ function MovieDetails() {
                             alt="Geen foto beschikbaar"
                         />}
                     </section>
-                    <article className="details-content">
+                    <article className="details-content-container">
                         <section>
                             <h1>{details.title}</h1>
                             {details.release_date && <p className="details-release-date">
@@ -112,14 +112,14 @@ function MovieDetails() {
                                 </Button>
                                 <Button
                                     type="button"
-                                    name={watchlistActive ? "active-favorite-button" : "inactive-favorite-button"}
+                                    name={watchlistActive ? "active-watchlist-button" : "inactive-watchlist-button"}
                                     clickHandler={() => setWatchlist(movieId)}
                                 >
                                     <img src={watchlistIcon} alt="watchlist-icon"/>
                                 </Button>
                                 <Button
                                     type="button"
-                                    name={watchedActive ? "active-favorite-button" : "inactive-favorite-button"}
+                                    name={watchedActive ? "active-watched-button" : "inactive-watched-button"}
                                     clickHandler={() => setWatched(movieId)}
                                 >
                                     <img src={watchedIcon} alt="watched-icon"/>

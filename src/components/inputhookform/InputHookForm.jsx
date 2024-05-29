@@ -7,7 +7,7 @@ InputHookForm.propTypes = {
     label: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
-    errors: PropTypes.arrayOf(PropTypes.string),
+    errors: PropTypes.string,
     register: PropTypes.func.isRequired,
     validationRules: PropTypes.object
 }

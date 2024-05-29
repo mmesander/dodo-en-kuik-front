@@ -35,6 +35,7 @@ function AuthContextProvider({children}) {
                 user: null,
                 status: 'done',
             });
+            navigate('/login');
         }
     }, []);
 

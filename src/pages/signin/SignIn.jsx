@@ -30,9 +30,9 @@ function SignIn() {
                 username: data.username,
                 password: data.password,
             });
-            login(response.data.accessToken);
+            login(response.data.jwt);
 
-            if (response.data.accessToken) {
+            if (response.data.jwt) {
                 setError(false);
             }
         } catch (error) {
@@ -95,7 +95,7 @@ function SignIn() {
                         >
                             Inloggen
                         </button>
-                        {loading ? <p>Aan het laden...</p> : <p className="backend-error-message">{errorMessage}</p>}
+                        {(!error && loading) ? <p>Aan het laden...</p> : <p className="backend-error-message">{errorMessage}</p>}
                     </form>
                     <h3>Nog geen account? <Link to="/registreren">Registreer je nu!</Link></h3>
                 </div>

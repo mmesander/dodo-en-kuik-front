@@ -21,11 +21,13 @@ import noImage from "../../assets/images/no-image.png"
 
 // Styles
 import "./Details.css"
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function MovieDetails() {
     const navigate = useNavigate();
     const {movieId} = useParams();
     const {listItem, setListItem} = useContext(ListsContext);
+    const {user} = useContext(AuthContext);
 
     const [details, setDetails] = useState({});
     const [genres, setGenres] = useState([]);
@@ -52,7 +54,7 @@ function MovieDetails() {
                 if (response.data) {
                     setError(false);
                 }
-                console.log(response.data);
+                // console.log(response.data);
                 setDetails(response.data);
                 setGenres(response.data.genres);
             } catch (error) {
@@ -65,8 +67,71 @@ function MovieDetails() {
         void fetchMovieDetails(movieId);
     }, []);
 
-    function setFavorite() {
+
+
+
+
+
+
+
+
+
+
+
+    function setFavorite(id) {
+        console.log(listItem.favoriteMovies);
+        console.log(user.username);
+        console.log(id);
+        console.log(movieId);
+
+        if (listItem.favoriteMovies.includes(id)) {
+            console.log("hij is present")
+        }
+
+        if (!listItem.favoriteMovies.includes(id)) {
+            console.log("hij is niet present")
+        }
+
+        // void removeFavorite(id);
     }
+
+
+
+    async function addFavorite(id) {
+        const storedToken = localStorage.getItem("token");
+        console.log(storedToken)
+        try {
+            const response = await axios.put(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
+                // headers: {
+                //     "Content-Type": "application/json",
+                //     Authorization: `Bearer ${storedToken}`
+                // },
+                id: id
+            });
+            console.log(response.data)
+        } catch (e) {
+            console.error(e);
+            console.log(e.request.responseURL)
+        }
+    }
+
+    async function removeFavorite(id) {
+        const storedToken = localStorage.getItem("token");
+        console.log(storedToken)
+        try {
+            const response = await axios.delete(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${storedToken}`
+                },
+                id: id
+            })
+            console.log(response.data)
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
 
     function setWatchlist() {
     }

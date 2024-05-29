@@ -1,5 +1,5 @@
 // Functions
-import {createContext, useContext, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import {AuthContext} from "./AuthContext.jsx";
 
@@ -20,6 +20,23 @@ function ListsContextProvider({children}) {
         watchlistSeries: [],
         watchedSeries: [],
     });
+
+    useEffect(() => {
+        if (user) {
+            void fetchUserLists(user)
+        }
+    }, [user]);
+
+    function fetchUserLists(user) {
+        setListItem(prevState => ({
+            favoriteMovies: user.favoriteMovies || prevState.favoriteMovies,
+            watchlistMovies: user.watchlistMovies || prevState.watchlistMovies,
+            watchedMovies: user.watchedMovies || prevState.watchedMovies,
+            favoriteSeries: user.favoriteSeries || prevState.favoriteSeries,
+            watchlistSeries: user.watchlistSeries || prevState.watchlistSeries,
+            watchedSeries: user.watchedSeries || prevState.watchedSeries,
+        }));
+    }
 
     const data = {
         listItem: listItem,

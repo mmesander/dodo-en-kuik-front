@@ -16,6 +16,8 @@ import Lists from "./pages/lists/Lists.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
 import SignIn from "./pages/signin/SignIn.jsx";
+import MovieDetails from "./pages/details/MovieDetails.jsx";
+import SeriesDetails from "./pages/details/SeriesDetails.jsx";
 
 // Styles
 import './App.css'
@@ -35,6 +37,8 @@ function App() {
                 <Route path="/profiel" element={<Profile/>}/>
                 <Route path="/registreren" element={<SignUp/>}/>
                 <Route path="/login" element={<SignIn/>}/>
+                <Route path="film-details/:movieId" element={<MovieDetails/>}/>
+                <Route path="serie-details/:seriesId" element={<SeriesDetails/>}/>
             </Routes>
             {isAuth && <Footer/>}
         </>

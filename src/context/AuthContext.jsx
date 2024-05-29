@@ -72,9 +72,7 @@ function AuthContextProvider({children}) {
                 }
             });
 
-            // Deze data gebruiken voor de lists context
-
-            console.log(response.data);
+            // Deze data gebruiken
             console.log(response.data);
 
             setAuth({
@@ -84,6 +82,12 @@ function AuthContextProvider({children}) {
                     id: response.data.id,
                     email: response.data.email,
                     username: response.data.username,
+                    favoriteMovies: response.data.favoriteMovies,
+                    watchlistMovies: response.data.watchlistMovies,
+                    watchedMovies: response.data.watchlistMovies,
+                    favoriteSeries: response.data.favoriteSeries,
+                    watchlistSeries: response.data.watchlistSeries,
+                    watchedSeries: response.data.watchlistSeries,
                 },
                 status: 'done',
             });

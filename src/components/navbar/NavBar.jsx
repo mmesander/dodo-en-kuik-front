@@ -1,14 +1,19 @@
 // Functions
-import React from "react";
+import {useContext} from "react";
 import {NavLink} from "react-router-dom";
 
-// Assets
-import logo from "../../assets/icons/dek-logo.png"
+// Context
+import {AuthContext} from "../../context/AuthContext.jsx";
 
+// Assets
+
+import logo from "../../assets/icons/dek-logo.png"
 // Styles
 import "./NavBar.css";
 
 function NavBar() {
+    const {logout} = useContext(AuthContext);
+
     return (
         <nav className="navbar-outer-container">
             <NavLink to="/">
@@ -63,6 +68,7 @@ function NavBar() {
                     <button
                         type="button"
                         className="nav-logout-button"
+                        onClick={logout}
                     >
                         Uitloggen
                     </button>

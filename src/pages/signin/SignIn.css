@@ -1,4 +1,4 @@
-.register-outer-container {
+.login-outer-container {
     background-image: url("../../assets/images/Unicorn.png");
     background-size: cover;
     background-position: center;
@@ -11,31 +11,31 @@
     align-items: center;
 }
 
-.register-inner-container {
+.login-inner-container {
     display: flex;
     flex-direction: column;
     background-color: var(--field-bg-color);
-    flex-basis: 600px;
-    width: 450px;
+    flex-basis: 400px;
+    width: 400px;
     border-radius: 10px;
     padding: 20px 40px 30px 40px;
     align-items: center;
     position: relative;
 }
 
-.register-inner-container h1 {
+.login-inner-container h1 {
     margin-bottom: 20px;
     color: var(--main-theme-color-white);
     font-size: 40px;
 }
 
-.register-inner-container label {
+.login-inner-container label {
     color: var(--main-theme-color-white);
     font-weight: bold;
     font-size: 18px;
 }
 
-.register-inner-container input {
+.login-inner-container input {
     width: 100%;
     border-radius: 5px;
     padding: 9px 8px;
@@ -43,15 +43,7 @@
     border: 2px solid transparent;
 }
 
-.input-error-message {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    min-height: 20px;
-    color: var(--field-error-message)
-}
-
-.register-inner-container button {
+.login-inner-container button {
     background-color: var(--main-theme-color-mint);
     color: var(--main-theme-color-white);
     width: 100%;
@@ -63,44 +55,52 @@
     padding: 10px;
 }
 
-.register-inner-container button:hover {
+.login-inner-container button:hover {
     cursor: pointer;
     color: var(--main-theme-color-black);
 }
 
-.register-inner-container input:focus {
+.login-inner-container input:focus {
     outline: 2px solid var(--main-theme-color-mint);
 }
-
-.register-inner-container button:disabled {
-    background-color: grey;
+.login-inner-container button:disabled {
+    background-color: var(--main-theme-color-grey);
     cursor: not-allowed;
     color: var(--main-theme-color-white);
 }
 
-.register-inner-container p {
+.login-inner-container p {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input-error-message {
     font-size: 15px;
     font-weight: bold;
     margin-bottom: 10px;
+    min-height: 20px;
     color: var(--field-error-message)
 }
 
-.register-inner-container h3 {
+.backend-error-message {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--field-error-message)
+}
+
+.login-inner-container h3 {
     color: var(--main-theme-color-white);
     position: absolute;
     bottom: -25px;
     left: 5px;
 }
 
-.register-inner-container a,
-.register-inner-container a:visited {
+.login-inner-container a,
+.login-inner-container a:visited {
     color: var(--main-theme-color-pink);
 }
 
-.register-inner-container a:hover {
+.login-inner-container a:hover {
     color: var(--main-theme-color-mint);
 }
 
-.succes-message {
-    color: var(--main-theme-color-green);
-}

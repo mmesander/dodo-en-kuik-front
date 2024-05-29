@@ -1,5 +1,5 @@
 // Functions
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import {useForm} from "react-hook-form";
 import axios from "axios";
@@ -8,9 +8,9 @@ import axios from "axios";
 import InputHookForm from "../../components/inputhookform/InputHookForm.jsx";
 
 // Styles
-import "./Register.css"
+import "./SignUp.css"
 
-function Register() {
+function SignUp() {
     const navigate = useNavigate();
     const {handleSubmit, register, watch, formState: {errors, isValid}} = useForm({mode: "onChange"});
 
@@ -49,7 +49,6 @@ function Register() {
         } catch (e) {
             console.error(e);
             setError(true);
-            console.log(e.response.data)
             setErrorMessage(e.response.data);
         }
         setLoading(false);
@@ -137,7 +136,7 @@ function Register() {
                         >
                             Registreren
                         </button>
-                        {loading ? <p>Aan het laden...</p> : <p>{errorMessage}</p>}
+                        {loading ? <p>Aan het laden...</p> : <p className="backend-error-message">{errorMessage}</p>}
                         {registrationSuccess && !error &&
                         <h4 className="succes-message">
                             Registratie is gelukt, je wordt in 3 seconden teruggeleid naar de login pagina
@@ -150,4 +149,4 @@ function Register() {
     )
 }
 
-export default Register;
+export default SignUp;

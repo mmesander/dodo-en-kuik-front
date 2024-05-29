@@ -1,6 +1,9 @@
 // Functions
 import {Route, Routes} from "react-router-dom";
 
+// Context
+import {AuthContext} from "./context/AuthContext.jsx";
+
 // Components
 import NavBar from "./components/navbar/NavBar.jsx";
 import Footer from "./components/footer/Footer.jsx";
@@ -11,25 +14,29 @@ import Search from "./pages/search/Search.jsx";
 import Suggestion from "./pages/suggestion/Suggestion.jsx";
 import Lists from "./pages/lists/Lists.jsx";
 import Profile from "./pages/profile/Profile.jsx";
-import Register from "./pages/register/Register.jsx";
+import SignUp from "./pages/signup/SignUp.jsx";
+import SignIn from "./pages/signin/SignIn.jsx";
 
 // Styles
 import './App.css'
+import {useContext} from "react";
 
 function App() {
+    const {isAuth} = useContext(AuthContext);
 
     return (
         <>
-            {/*<NavBar/>*/}
+            {isAuth && <NavBar/>}
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/zoeken" element={<Search/>}/>
                 <Route path="/suggestie" element={<Suggestion/>}/>
                 <Route path="/lijsten" element={<Lists/>}/>
                 <Route path="/profiel" element={<Profile/>}/>
-                <Route path="/registreren" element={<Register/>}/>
+                <Route path="/registreren" element={<SignUp/>}/>
+                <Route path="/login" element={<SignIn/>}/>
             </Routes>
-            {/*<Footer/>*/}
+            {isAuth && <Footer/>}
         </>
     );
 }

@@ -1,5 +1,6 @@
 // Functions
 import {Route, Routes} from "react-router-dom";
+import {useContext} from "react";
 
 // Context
 import {AuthContext} from "./context/AuthContext.jsx";
@@ -14,14 +15,19 @@ import Search from "./pages/search/Search.jsx";
 import Suggestion from "./pages/suggestion/Suggestion.jsx";
 import Lists from "./pages/lists/Lists.jsx";
 import Profile from "./pages/profile/Profile.jsx";
+
 import SignUp from "./pages/signup/SignUp.jsx";
 import SignIn from "./pages/signin/SignIn.jsx";
+
 import MovieDetails from "./pages/details/MovieDetails.jsx";
 import SeriesDetails from "./pages/details/SeriesDetails.jsx";
 
+import ListsFavorites from "./pages/lists/ListsFavorites.jsx";
+import ListsWatched from "./pages/lists/ListsWatched.jsx";
+import ListsWatchlist from "./pages/lists/ListsWatchlist.jsx";
+
 // Styles
 import './App.css'
-import {useContext} from "react";
 
 function App() {
     const {isAuth} = useContext(AuthContext);
@@ -39,6 +45,9 @@ function App() {
                 <Route path="/login" element={<SignIn/>}/>
                 <Route path="film-details/:movieId" element={<MovieDetails/>}/>
                 <Route path="serie-details/:seriesId" element={<SeriesDetails/>}/>
+                <Route path="/lijsten/favorieten" element={<ListsFavorites/>}/>
+                <Route path="/lijsten/watchlist" element={<ListsWatchlist/>}/>
+                <Route path="/lijsten/gezien" element={<ListsWatched/>}/>
             </Routes>
             {isAuth && <Footer/>}
         </>

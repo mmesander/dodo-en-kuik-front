@@ -1,6 +1,10 @@
 // Functions
 import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
 import PropTypes from "prop-types";
+
+// Context
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Helpers
 import roundRating from "../../helpers/roundRating.jsx";
@@ -13,8 +17,6 @@ import noImage from '../../assets/images/no-image.png';
 
 // Styles
 import "./MovieCard.css";
-import {useContext} from "react";
-import {AuthContext} from "../../context/AuthContext.jsx";
 
 MovieCard.propTypes = {
     title: PropTypes.string,

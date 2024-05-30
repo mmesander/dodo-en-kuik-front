@@ -21,7 +21,6 @@ import noImage from "../../assets/images/no-image.png"
 
 // Styles
 import "./Details.css"
-import listsContext from "../../context/ListsContext.jsx";
 
 function MovieDetails() {
     const navigate = useNavigate();
@@ -273,7 +272,6 @@ function MovieDetails() {
                             <h3>Omschrijving:</h3>
                             <p>{details.overview}</p>
                         </section>
-
                         <Button
                             type="button"
                             name="back-to-previous-page"

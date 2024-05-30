@@ -37,6 +37,12 @@
     margin: 20px 0 5px 0;
 }
 
+.seasons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
 .details-release-date {
     font-size: 18px;
 }

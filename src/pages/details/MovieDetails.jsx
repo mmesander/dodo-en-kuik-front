@@ -272,7 +272,6 @@ function MovieDetails() {
                             <h3>Omschrijving:</h3>
                             <p>{details.overview}</p>
                         </section>
-
                         <Button
                             type="button"
                             name="back-to-previous-page"

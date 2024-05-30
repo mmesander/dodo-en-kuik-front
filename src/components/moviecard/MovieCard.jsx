@@ -13,6 +13,8 @@ import noImage from '../../assets/images/no-image.png';
 
 // Styles
 import "./MovieCard.css";
+import {useContext} from "react";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 MovieCard.propTypes = {
     title: PropTypes.string,
@@ -26,6 +28,16 @@ MovieCard.propTypes = {
 function MovieCard({title, image, rating, id, name, isMovie}) {
     const navigate = useNavigate();
     const roundedRating = roundRating(rating);
+    const {user} = useContext(AuthContext);
+
+    const favoriteMovieActive = user && user.favoriteMovies ? user.favoriteMovies.includes(id) : false;
+    const watchlistMovieActive = user && user.watchlistMovies ? user.watchlistMovies.includes(id) : false;
+    const watchedMovieActive = user && user.watchedMovies ? user.watchedMovies.includes(id) : false;
+
+    const favoriteSeriesActive = user && user.favoriteSeries ? user.favoriteSeries.includes(id) : false;
+    const watchlistSeriesActive = user && user.watchlistSeries ? user.watchlistSeries.includes(id) : false;
+    const watchedSeriesActive = user && user.watchedSeries ? user.watchedSeries.includes(id) : false;
+
 
     function clickHandler() {
         if (id && isMovie) {
@@ -64,20 +76,17 @@ function MovieCard({title, image, rating, id, name, isMovie}) {
                 </section>
                 <section className="icons-container">
                     <div
-                        // className={(favoriteMovieActive || favoriteSeriesActive) ? "active-favorite-icon" : "default-icon"}
-                        className="default-icon"
+                        className={(favoriteMovieActive || favoriteSeriesActive) ? "active-favorite-icon" : "default-icon"}
                     >
                         <img src={favoriteIcon} alt="favorite-icon"/>
                     </div>
                     <div
-                        // className={(watchlistMovieActive || watchlistSeriesActive) ? "active-watchlist-icon" : "default-icon"}
-                        className="default-icon"
+                        className={(watchlistMovieActive || watchlistSeriesActive) ? "active-watchlist-icon" : "default-icon"}
                     >
                         <img src={watchlistIcon} alt="watchlist-icon"/>
                     </div>
                     <div
-                        // className={(watchedMovieActive || watchedSeriesActive) ? "active-watched-icon" : "default-icon"}
-                        className="default-icon"
+                        className={(watchedMovieActive || watchedSeriesActive) ? "active-watched-icon" : "default-icon"}
                     >
                         <img src={watchedIcon} alt="watched-icon"/>
                     </div>

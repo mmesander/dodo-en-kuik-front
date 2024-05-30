@@ -1,0 +1,65 @@
+.lists-titles {
+    margin-top: 30px;
+    color: var(--main-theme-color-white);
+}
+
+.lists-container {
+    display: flex;
+    max-width: 1000px;
+    margin-inline: 30px;
+    min-height: 375px;
+    align-items: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    white-space: nowrap;
+}
+
+.list-container {
+    display: flex;
+    max-width: 1000px;
+    margin-inline: 30px;
+    min-height: 375px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.lists-section-container .error-message {
+    color: var(--main-error-color-red);
+}
+
+.no-items-message {
+    color: var(--main-theme-color-white);
+    font-style: italic;
+}
+
+/*.list-container::-webkit-scrollbar {*/
+/*    height: 16px;*/
+/*}*/
+
+/*.list-container::-webkit-scrollbar-button:start {*/
+/*    height: 16px;*/
+/*    width: 16px;*/
+/*    background-color: var(--main-theme-color-grey);*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*.list-container::-webkit-scrollbar-button:end {*/
+/*    height: 16px;*/
+/*    width: 16px;*/
+/*    background-color: var(--main-theme-color-grey);*/
+/*}*/
+
+/*.list-container:active {*/
+/*    cursor: grabbing;*/
+/*}*/
+
+/*.list-container::-webkit-scrollbar-thumb {*/
+/*    background-color: var(--main-theme-color-pink);*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*.list-container::-webkit-scrollbar-track {*/
+/*    background-color: var(--main-theme-color-grey);*/
+/*}*/

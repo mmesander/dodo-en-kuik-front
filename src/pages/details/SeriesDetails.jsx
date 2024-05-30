@@ -257,6 +257,10 @@ function SeriesDetails() {
                                 <h2>Rating: <span>{roundRating(details.vote_average)}</span></h2>
                                 <h3>User votes: <span>{details.vote_count}</span></h3>
                             </div>
+                            <div className="seasons-container">
+                                <h3>Seasons: <span>{details.number_of_seasons}</span></h3>
+                                <h3>Episodes: <span>{details.number_of_episodes}</span></h3>
+                            </div>
                             {genres.length > 0 && <ul className="genres-container">
                                 {genres.map((genre) => {
                                     return <li key={genre.id}>{genre.name}</li>

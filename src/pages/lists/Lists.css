@@ -3,6 +3,16 @@
     color: var(--main-theme-color-white);
 }
 
+.lists-titles a,
+.lists-titles a:visited {
+    color: var(--main-theme-color-white);
+    text-decoration: none;
+}
+
+.lists-titles a:hover {
+    color: var(--main-theme-color-pink);
+}
+
 .lists-container {
     display: flex;
     max-width: 1000px;

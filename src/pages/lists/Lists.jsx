@@ -12,6 +12,7 @@ import fetchListsData from "../../helpers/fetchListsData.jsx";
 
 // Styles
 import "./Lists.css"
+import {Link} from "react-router-dom";
 
 function Lists() {
     const {user} = useContext(AuthContext);
@@ -117,7 +118,7 @@ function Lists() {
     return (
         <>
             <div className="page-outer-container">
-                <h1 className="lists-titles">Favorieten</h1>
+                <h1 className="lists-titles"><Link to="/lijsten/favorieten">Favorieten</Link></h1>
                 <div className="lists-container">
                     {favoriteMoviesArray.length > 0 && favoriteMoviesArray.map((favorite) => {
                         return <MovieCard
@@ -146,7 +147,7 @@ function Lists() {
                     {loading && <h3 className="loading-message">Je lijst wordt opgehaald... </h3>}
                     {error && <h3 className="error-message">Foutmelding: Er kan geen data opgehaald worden</h3>}
                 </div>
-                <h1 className="lists-titles">Watchlist</h1>
+                <h1 className="lists-titles"><Link to="/lijsten/watchlist">Watchlist</Link></h1>
                 <div className="lists-container">
                     {watchlistMoviesArray.length > 0 && watchlistMoviesArray.map((watchlist) => {
                         return <MovieCard
@@ -175,7 +176,7 @@ function Lists() {
                     {loading && <h3 className="loading-message">Je lijst wordt opgehaald... </h3>}
                     {error && <h3 className="error-message">Foutmelding: Er kan geen data opgehaald worden</h3>}
                 </div>
-                <h1 className="lists-titles">Al gezien</h1>
+                <h1 className="lists-titles"><Link to="/lijsten/gezien">Al gezien</Link></h1>
                 <div className="lists-container">
                     {watchedMoviesArray.length > 0 && watchedMoviesArray.map((watched) => {
                         return <MovieCard

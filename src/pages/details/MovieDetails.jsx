@@ -21,6 +21,7 @@ import noImage from "../../assets/images/no-image.png"
 
 // Styles
 import "./Details.css"
+import listsContext from "../../context/ListsContext.jsx";
 
 function MovieDetails() {
     const navigate = useNavigate();
@@ -29,6 +30,8 @@ function MovieDetails() {
 
     const [details, setDetails] = useState({});
     const [genres, setGenres] = useState([]);
+    const [providers, setProviders] = useState([]);
+    const [providerMessage, setProviderMessage] = useState("This movie is not available for streaming yet");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
@@ -67,7 +70,33 @@ function MovieDetails() {
             setLoading(false);
         }
 
+        async function fetchWatchProviders(id) {
+            try {
+                setLoading(true);
+                const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/watch/providers`, options);
+                if (response.data) {
+                    setError(false);
+                }
+
+                if (response.data.results.NL) {
+                    if (response.data.results.NL.flatrate) {
+                        setProviders(response.data.results.NL.flatrate);
+                        setProviderMessage("Stream on:");
+                    } else {
+                        setProviderMessage("This movie is not available for streaming yet");
+                    }
+                }
+
+                console.log(response.data.results);
+            } catch (error) {
+                setError(true);
+                console.error(error);
+            }
+            setLoading(false);
+        }
+
         void fetchMovieDetails(movieId);
+        void fetchWatchProviders(movieId);
     }, []);
 
 
@@ -225,14 +254,26 @@ function MovieDetails() {
                                 <h2>Rating: <span>{roundRating(details.vote_average)}</span></h2>
                                 <h3>User votes: <span>{details.vote_count}</span></h3>
                             </div>
-                            {genres.length > 0 && <ul>
+                            {genres.length > 0 && <ul className="genres-container">
                                 {genres.map((genre) => {
                                     return <li key={genre.id}>{genre.name}</li>
                                 })}
                             </ul>}
+                            <div className="providers-container">
+                                {<h4>{providerMessage}</h4>}
+                                {providers && providers.length > 0 && <ul>
+                                    {providers.map((provider) => {
+                                        return <li key={provider.provider_id}>
+                                            <img
+                                                src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`}
+                                                alt="Provider logo"/></li>
+                                    })}
+                                </ul>}
+                            </div>
                             <h3>Omschrijving:</h3>
                             <p>{details.overview}</p>
                         </section>
+
                         <Button
                             type="button"
                             name="back-to-previous-page"

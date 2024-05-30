@@ -26,7 +26,6 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 function MovieDetails() {
     const navigate = useNavigate();
     const {movieId} = useParams();
-    const {listItem, setListItem} = useContext(ListsContext);
     const {user} = useContext(AuthContext);
 
     const [details, setDetails] = useState({});
@@ -34,9 +33,15 @@ function MovieDetails() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const favoriteActive = listItem.favoriteMovies.includes(movieId);
-    const watchlistActive = listItem.watchlistMovies.includes(movieId);
-    const watchedActive = listItem.watchedMovies.includes(movieId);
+    const id = parseInt(movieId);
+
+    const favoriteInitialState = user && user.favoriteMovies ? user.favoriteMovies.includes(id) : false;
+    const watchlistInitialState = user && user.watchlistMovies ? user.watchlistMovies.includes(id) : false;
+    const watchedInitialState = user && user.watchedMovies ? user.watchedMovies.includes(id) : false;
+
+    const [favoriteActive, setFavoriteActive] = useState(favoriteInitialState);
+    const [watchlistActive, setWatchlistActive] = useState(watchlistInitialState);
+    const [watchedActive, setWatchedActive] = useState(watchedInitialState);
 
     const options = {
         method: 'GET',
@@ -54,7 +59,6 @@ function MovieDetails() {
                 if (response.data) {
                     setError(false);
                 }
-                // console.log(response.data);
                 setDetails(response.data);
                 setGenres(response.data.genres);
             } catch (error) {
@@ -68,76 +72,149 @@ function MovieDetails() {
     }, []);
 
 
-
-
-
-
-
-
-
-
-
-
     function setFavorite(id) {
-        console.log(listItem.favoriteMovies);
-        console.log(user.username);
-        console.log(id);
-        console.log(movieId);
-
-        if (listItem.favoriteMovies.includes(id)) {
-            console.log("hij is present")
+        if (user.favoriteMovies.includes(parseInt(id))) {
+            void removeMovieFromList(parseInt(id), "favorites");
         }
 
-        if (!listItem.favoriteMovies.includes(id)) {
-            console.log("hij is niet present")
+        if (!user.favoriteMovies.includes(parseInt(id))) {
+            void addMovieToList(parseInt(id), "favorites");
         }
-
-        // void removeFavorite(id);
     }
 
+    function setWatchlist(id) {
+        if (user.watchlistMovies.includes(parseInt(id))) {
+            void removeMovieFromList(parseInt(id), "watchlist");
+        }
 
+        if (!user.watchlistMovies.includes(parseInt(id))) {
+            void addMovieToList(parseInt(id), "watchlist");
+        }
+    }
 
-    async function addFavorite(id) {
+    function setWatched(id) {
+        if (user.watchedMovies.includes(parseInt(id))) {
+            void removeMovieFromList(parseInt(id), "watched");
+        }
+
+        if (!user.watchedMovies.includes(parseInt(id))) {
+            void addMovieToList(parseInt(id), "watched");
+        }
+    }
+
+    async function addMovieToList(id, list) {
         const storedToken = localStorage.getItem("token");
-        console.log(storedToken)
         try {
-            const response = await axios.put(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
-                // headers: {
-                //     "Content-Type": "application/json",
-                //     Authorization: `Bearer ${storedToken}`
-                // },
-                id: id
-            });
-            console.log(response.data)
+            const response = await axios.put(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/${list}`, {
+                    id: id
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${storedToken}`
+                    }
+                });
+            if (response.data) {
+                user.favoriteMovies = response.data.favoriteMovies;
+                user.watchlistMovies = response.data.watchlistMovies;
+                user.watchedMovies = response.data.watchedMovies;
+            }
+
+            if (list === "favorites") {
+                setFavoriteActive(true);
+            }
+
+            if (list === "watchlist") {
+                setWatchlistActive(true);
+            }
+
+            if (list === "watched") {
+                setWatchedActive(true);
+            }
         } catch (e) {
             console.error(e);
-            console.log(e.request.responseURL)
         }
     }
 
-    async function removeFavorite(id) {
+    async function removeMovieFromList(id, list) {
         const storedToken = localStorage.getItem("token");
-        console.log(storedToken)
         try {
-            const response = await axios.delete(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
+            const response = await axios.delete(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/${list}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${storedToken}`
                 },
-                id: id
+                data: {
+                    id: id
+                }
             })
-            console.log(response.data)
+            if (response.data) {
+                user.favoriteMovies = response.data.favoriteMovies;
+                user.watchlistMovies = response.data.watchlistMovies;
+                user.watchedMovies = response.data.watchedMovies;
+            }
+
+            if (list === "favorites") {
+                setFavoriteActive(false);
+            }
+
+            if (list === "watchlist") {
+                setWatchlistActive(false);
+            }
+
+            if (list === "watched") {
+                setWatchedActive(false);
+            }
+
         } catch (e) {
             console.error(e);
         }
     }
 
-
-    function setWatchlist() {
-    }
-
-    function setWatched() {
-    }
+    // async function addFavorite(id) {
+    //     const storedToken = localStorage.getItem("token");
+    //     try {
+    //         const response = await axios.put(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
+    //                 id: id
+    //             },
+    //             {
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     Authorization: `Bearer ${storedToken}`
+    //                 }
+    //             });
+    //         setFavoriteActive(true);
+    //         if (response.data) {
+    //             user.favoriteMovies = response.data.favoriteMovies;
+    //         }
+    //
+    //
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // }
+    //
+    // async function removeFavorite(id) {
+    //     const storedToken = localStorage.getItem("token");
+    //     try {
+    //         const response = await axios.delete(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${storedToken}`
+    //             },
+    //             data: {
+    //                 id: id
+    //             }
+    //         })
+    //         setFavoriteActive(false);
+    //         if (response.data) {
+    //             user.favoriteMovies = response.data.favoriteMovies;
+    //         }
+    //
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // }
 
     return (
         <>

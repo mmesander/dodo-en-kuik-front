@@ -21,7 +21,6 @@ import noImage from "../../assets/images/no-image.png"
 
 // Styles
 import "./Details.css"
-import listsContext from "../../context/ListsContext.jsx";
 
 function MovieDetails() {
     const navigate = useNavigate();

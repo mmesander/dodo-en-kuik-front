@@ -29,7 +29,11 @@
     font-size: 40px;
 }
 
-.details-content-container h2 {
+.vote-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin: 20px 0 5px 0;
 }
 

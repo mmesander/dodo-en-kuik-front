@@ -4,7 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 
 // Context
-import {ListsContext} from "../../context/ListsContext.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Components
 import Button from "../../components/button/Button.jsx";
@@ -21,7 +21,6 @@ import noImage from "../../assets/images/no-image.png"
 
 // Styles
 import "./Details.css"
-import {AuthContext} from "../../context/AuthContext.jsx";
 
 function MovieDetails() {
     const navigate = useNavigate();
@@ -171,51 +170,6 @@ function MovieDetails() {
         }
     }
 
-    // async function addFavorite(id) {
-    //     const storedToken = localStorage.getItem("token");
-    //     try {
-    //         const response = await axios.put(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
-    //                 id: id
-    //             },
-    //             {
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                     Authorization: `Bearer ${storedToken}`
-    //                 }
-    //             });
-    //         setFavoriteActive(true);
-    //         if (response.data) {
-    //             user.favoriteMovies = response.data.favoriteMovies;
-    //         }
-    //
-    //
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // }
-    //
-    // async function removeFavorite(id) {
-    //     const storedToken = localStorage.getItem("token");
-    //     try {
-    //         const response = await axios.delete(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 Authorization: `Bearer ${storedToken}`
-    //             },
-    //             data: {
-    //                 id: id
-    //             }
-    //         })
-    //         setFavoriteActive(false);
-    //         if (response.data) {
-    //             user.favoriteMovies = response.data.favoriteMovies;
-    //         }
-    //
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // }
-
     return (
         <>
             <div className="page-outer-container">
@@ -267,7 +221,10 @@ function MovieDetails() {
                                     <img src={watchedIcon} alt="watched-icon"/>
                                 </Button>
                             </div>
-                            <h2>Rating: <span>{details.vote_average}</span></h2>
+                            <div className="vote-container">
+                                <h2>Rating: <span>{roundRating(details.vote_average)}</span></h2>
+                                <h3>User votes: <span>{details.vote_count}</span></h3>
+                            </div>
                             {genres.length > 0 && <ul>
                                 {genres.map((genre) => {
                                     return <li key={genre.id}>{genre.name}</li>
@@ -288,8 +245,6 @@ function MovieDetails() {
             </div>
         </>
     )
-
-
 }
 
 export default MovieDetails;

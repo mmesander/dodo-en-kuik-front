@@ -171,51 +171,6 @@ function MovieDetails() {
         }
     }
 
-    // async function addFavorite(id) {
-    //     const storedToken = localStorage.getItem("token");
-    //     try {
-    //         const response = await axios.put(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
-    //                 id: id
-    //             },
-    //             {
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                     Authorization: `Bearer ${storedToken}`
-    //                 }
-    //             });
-    //         setFavoriteActive(true);
-    //         if (response.data) {
-    //             user.favoriteMovies = response.data.favoriteMovies;
-    //         }
-    //
-    //
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // }
-    //
-    // async function removeFavorite(id) {
-    //     const storedToken = localStorage.getItem("token");
-    //     try {
-    //         const response = await axios.delete(`http://localhost:8088/users/auth/${user.username.toLowerCase()}/movies/favorites`, {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 Authorization: `Bearer ${storedToken}`
-    //             },
-    //             data: {
-    //                 id: id
-    //             }
-    //         })
-    //         setFavoriteActive(false);
-    //         if (response.data) {
-    //             user.favoriteMovies = response.data.favoriteMovies;
-    //         }
-    //
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // }
-
     return (
         <>
             <div className="page-outer-container">
@@ -288,8 +243,6 @@ function MovieDetails() {
             </div>
         </>
     )
-
-
 }
 
 export default MovieDetails;

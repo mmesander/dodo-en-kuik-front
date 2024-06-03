@@ -424,7 +424,7 @@ function Search() {
                                 Volgende
                             </Button>
                         </div>}
-                        <div className="filter-search-inner-container">
+                        <div className="filter-search-results-inner-container">
                             {Object.keys(filterSearchResults).length > 0 && filtersActive && filterSearchResults.map((search) => {
                                 if (!isMovie && search.name) {
                                     return <MovieCard

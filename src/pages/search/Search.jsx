@@ -110,6 +110,24 @@ function Search() {
     function setSeriesGenres() {}
     async function fetchFilterSearch() {}
     function handleFilterSearch() {}
+
+    return (
+        <>
+            <div className="searchpage-outer-container">
+                <section className="filter-search-container">
+                    <div className="search-menu-container">
+                        <div className="search-menu specific-search">
+                            <h2>Zoeken</h2>
+                            <p>Zoek hier naar een specifieke film of serie</p>
+                        </div>
+                    </div>
+                    <div className="filter-search-results-outer-container">
+
+                    </div>
+                </section>
+            </div>
+        </>
+    )
 }
 
 export default Search;

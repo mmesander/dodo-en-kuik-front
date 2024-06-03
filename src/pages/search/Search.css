@@ -180,3 +180,18 @@
     margin-inline: 30px;
     width: 80%;
 }
+
+.filter-search-results-inner-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 1000px;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.no-results-filter {
+    color: var(--main-theme-color-white);
+    font-style: italic;
+}
+

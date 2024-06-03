@@ -1,11 +1,17 @@
 // Functions
 import {useNavigate, useParams} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 // Components
 import Input from "../../components/inputelements/Input.jsx";
 import Button from "../../components/button/Button.jsx";
 import InputSlider from "react-input-slider";
+import MovieCard from "../../components/moviecard/MovieCard.jsx";
+
+// Helpers
+import createGenreArray from "../../helpers/createGenreArray.jsx";
+import createFilterStrings from "../../helpers/createFilterString.jsx";
 
 // Styles
 import "./Search.css"
@@ -104,39 +110,113 @@ function Search() {
     };
 
     // General
-    // Hier komt de useEffect
+    useEffect(() => {
+        if (page >= 1) {
+            void fetchFilterSearch(
+                endpoint,
+                page,
+                sortOrder,
+            );
+            setFiltersActive(true);
+            updateUrl();
+        }
+    }, [page, sortOrder]);
 
     function updateUrl() {
+        const newUrl = `/zoeken/filter/${page}`;
+        navigate(newUrl, {replace: true});
     }
 
     // Specific Search
-    function handleSpecificSearch() {
+    function handleSpecificSearch(e) {
+        e.preventDefault();
+        const url = `/zoeken/specifiek/1?zoekopdracht=${encodeURIComponent(specificSearch)}`;
+        navigate(`${url}`)
     }
-
 
     // Filter Search
-    function handleSortButton() {
+    function handleSortOrder(sortString) {
+        setPage(1);
+        setSortOrder(sortString);
     }
 
-    function handleMovieButton() {
+    function handleSetMovie() {
+        setEndpoint('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=');
+        setIsMovie(true);
+        setFiltersActive(false);
+        setMinRating(0);
+        setMaxRating(10);
+        setPage(1);
+        setGenresList({
+            ...genresList,
+            seriesGenres: [],
+        });
     }
 
-    function handleSeriesButton() {
+    function handleSetSeries() {
+        setEndpoint('https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&page=');
+        setIsMovie(false);
+        setFiltersActive(false);
+        setMinRating(0);
+        setMaxRating(10);
+        setPage(1);
+        setGenresList({
+            ...genresList,
+            movieGenres: [],
+        });
     }
 
     function handleFilterReset() {
+        setMinRating(0);
+        setMaxRating(10);
+        setFiltersActive(false);
+        setGenresList({
+            ...genresList,
+            movieGenres: [],
+            seriesGenres: [],
+        });
     }
 
-    function setMovieGenres() {
+    function setMovieGenres(id) {
+        const movieGenresArray = createGenreArray(id, genresList.movieGenres);
+
+        setGenresList({
+            ...genresList,
+            movieGenres: movieGenresArray,
+        });
     }
 
-    function setSeriesGenres() {
+    function setSeriesGenres(id) {
+        const seriesGenresArray = createGenreArray(id, genresList.seriesGenres);
+
+        setGenresList({
+            ...genresList,
+            seriesGenres: seriesGenresArray,
+        });
     }
 
-    async function fetchFilterSearch() {
+    async function fetchFilterSearch(endpoint, page, sortOrder) {
+        setLoading(true);
+        const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
+        try {
+            const response = await axios.get(`${endpoint}+${page}${sortOrder}${ratingString}${genreString}`, options);
+            if (response.data) {
+                setError(false);
+            }
+            setFilterSearchResults(response.data.results);
+            setTotalPages(response.data.total_pages);
+        } catch (error) {
+            setError(true);
+            console.error(error);
+        }
+        setLoading(false);
     }
 
     function handleFilterSearch() {
+        setFiltersActive(true);
+        setPage(1);
+
+        void fetchFilterSearch(endpoint, page, sortOrder);
     }
 
     return (
@@ -174,7 +254,7 @@ function Search() {
                                     key={sortBy.string}
                                     type="button"
                                     name={sortOrder.includes(sortBy.string) ? "active-filter-button" : "inactive-filter-button"}
-                                    clickHandler={() => handleSortButton(sortBy.string)}
+                                    clickHandler={() => handleSortOrder(sortBy.string)}
                                 >
                                     {sortBy.name}
                                 </Button>
@@ -184,7 +264,7 @@ function Search() {
                                     key={sortBy.string}
                                     type="button"
                                     name={sortOrder.includes(sortBy.string) ? "active-filter-button" : "inactive-filter-button"}
-                                    clickHandler={() => handleSortButton(sortBy.string)}
+                                    clickHandler={() => handleSortOrder(sortBy.string)}
                                 >
                                     {sortBy.name}
                                 </Button>
@@ -206,7 +286,7 @@ function Search() {
                             <Button
                                 type="radio"
                                 id="searchfilter-movies"
-                                clickHandler={handleMovieButton}
+                                clickHandler={handleSetMovie}
                                 name={isMovie ? "active-filter-button" : "inactive-filter-button"}
                             >
                                 Ik zoek naar films
@@ -214,7 +294,7 @@ function Search() {
                             <Button
                                 type="radio"
                                 id="searchfilter-series"
-                                clickHandler={handleSeriesButton}
+                                clickHandler={handleSetSeries}
                                 name={!isMovie ? "active-filter-button" : "inactive-filter-button"}
                             >
                                 Ik zoek naar series
@@ -321,7 +401,52 @@ function Search() {
                         </div>
                     </div>
                     <div className="filter-search-results-outer-container">
-
+                        <div className="loading-error-section">
+                            {loading && <h3 className="loading-message">Laden... </h3>}
+                            {filterSearchResults.length === 0 &&
+                                <h3 className="no-results-filter">Er zijn geen resultaten gevonden!</h3>}
+                            {error &&
+                                <h3 className="error-message">Foutmelding: Er kan geen data opgehaald worden!</h3>}
+                        </div>
+                        {filtersActive && (filterSearchResults.length > 1) && <div className="button-set-page-section">
+                            <Button
+                                type="button"
+                                clickHandler={() => setPage(page - 1)}
+                                disabled={page === 1}
+                            >
+                                Vorige
+                            </Button>
+                            <Button
+                                type="button"
+                                clickHandler={() => setPage(page + 1)}
+                                disabled={page === totalPages}
+                            >
+                                Volgende
+                            </Button>
+                        </div>}
+                        <div className="filter-search-inner-container">
+                            {Object.keys(filterSearchResults).length > 0 && filtersActive && filterSearchResults.map((search) => {
+                                if (!isMovie && search.name) {
+                                    return <MovieCard
+                                        key={search.id}
+                                        name={search.name}
+                                        image={search.poster_path}
+                                        rating={search.vote_average}
+                                        id={search.id}
+                                        isMovie={false}
+                                    />
+                                } else if (isMovie && search.title) {
+                                    return <MovieCard
+                                        key={search.id}
+                                        title={search.title}
+                                        image={search.poster_path}
+                                        rating={search.vote_average}
+                                        id={search.id}
+                                        isMovie={true}
+                                    />
+                                }
+                            })}
+                        </div>
                     </div>
                 </section>
             </div>

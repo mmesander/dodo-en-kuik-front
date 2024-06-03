@@ -31,6 +31,7 @@ import TrendingSeries from "./pages/trending/TrendingSeries.jsx";
 
 // Styles
 import './App.css'
+import SpecificSearch from "./pages/search/SpecificSearch.jsx";
 
 function App() {
     const {isAuth} = useContext(AuthContext);
@@ -42,17 +43,18 @@ function App() {
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/trending-films/:pageId" element={<TrendingMovies/>}/>
                 <Route path="/trending-series/:pageId" element={<TrendingSeries/>}/>
-                <Route path="/zoeken" element={<Search/>}/>
+                <Route path="/zoeken/filter/:filterId" element={<Search/>}/>
+                <Route path="/zoeken/specifiek/:searchId" element={<SpecificSearch/>}/>
                 <Route path="/suggestie" element={<Suggestion/>}/>
                 <Route path="/lijsten" element={<Lists/>}/>
+                <Route path="/lijsten/favorieten" element={<ListsFavorites/>}/>
+                <Route path="/lijsten/watchlist" element={<ListsWatchlist/>}/>
+                <Route path="/lijsten/gezien" element={<ListsWatched/>}/>
                 <Route path="/profiel" element={<Profile/>}/>
                 <Route path="/registreren" element={<SignUp/>}/>
                 <Route path="/login" element={<SignIn/>}/>
                 <Route path="film-details/:movieId" element={<MovieDetails/>}/>
                 <Route path="serie-details/:seriesId" element={<SeriesDetails/>}/>
-                <Route path="/lijsten/favorieten" element={<ListsFavorites/>}/>
-                <Route path="/lijsten/watchlist" element={<ListsWatchlist/>}/>
-                <Route path="/lijsten/gezien" element={<ListsWatched/>}/>
             </Routes>
             {isAuth && <Footer/>}
         </>

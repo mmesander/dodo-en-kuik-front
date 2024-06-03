@@ -26,6 +26,9 @@ import ListsFavorites from "./pages/lists/ListsFavorites.jsx";
 import ListsWatched from "./pages/lists/ListsWatched.jsx";
 import ListsWatchlist from "./pages/lists/ListsWatchlist.jsx";
 
+import TrendingMovies from "./pages/trending/TrendingMovies.jsx";
+import TrendingSeries from "./pages/trending/TrendingSeries.jsx";
+
 // Styles
 import './App.css'
 
@@ -37,6 +40,8 @@ function App() {
             {isAuth && <NavBar/>}
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
+                <Route path="/trending-films/:pageId" element={<TrendingMovies/>}/>
+                <Route path="/trending-series/:pageId" element={<TrendingSeries/>}/>
                 <Route path="/zoeken" element={<Search/>}/>
                 <Route path="/suggestie" element={<Suggestion/>}/>
                 <Route path="/lijsten" element={<Lists/>}/>

@@ -8,7 +8,7 @@ import {useForm} from "react-hook-form";
 import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Components
-import InputHookForm from "../../components/inputhookform/InputHookForm.jsx";
+import InputHookForm from "../../components/inputelements/InputHookForm.jsx";
 
 // Styles
 import "./SignIn.css"

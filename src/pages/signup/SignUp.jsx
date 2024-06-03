@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 
 // Components
-import InputHookForm from "../../components/inputhookform/InputHookForm.jsx";
+import InputHookForm from "../../components/inputelements/InputHookForm.jsx";
 
 // Styles
 import "./SignUp.css"

@@ -1,5 +1,14 @@
+// Functions
 import {useNavigate, useParams} from "react-router-dom";
 import {useState} from "react";
+
+// Components
+import Input from "../../components/inputelements/Input.jsx";
+import Button from "../../components/button/Button.jsx";
+import InputSlider from "react-input-slider";
+
+// Styles
+import "./Search.css"
 
 function Search() {
     // General
@@ -21,7 +30,7 @@ function Search() {
     const [endpoint, setEndpoint] = useState('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=');
     const [minRating, setMinRating] = useState(0);
     const [maxRating, setMaxRating] = useState(10);
-    const [sortBy, setSortBy] = useState("&sort_by=popularity.desc");
+    const [sortOrder, setSortOrder] = useState("&sort_by=popularity.desc");
     const [genresList, setGenresList] = useState({
         movieGenres: [],
         seriesGenres: [],
@@ -97,31 +106,221 @@ function Search() {
     // General
     // Hier komt de useEffect
 
+    function updateUrl() {
+    }
+
     // Specific Search
-    function updateUrl() {}
+    function handleSpecificSearch() {
+    }
 
 
     // Filter Search
-    function handleSortButton() {}
-    function handleMovieButton() {}
-    function handleSeriesButton() {}
-    function handleFilterReset() {}
-    function setMovieGenres() {}
-    function setSeriesGenres() {}
-    async function fetchFilterSearch() {}
-    function handleFilterSearch() {}
+    function handleSortButton() {
+    }
+
+    function handleMovieButton() {
+    }
+
+    function handleSeriesButton() {
+    }
+
+    function handleFilterReset() {
+    }
+
+    function setMovieGenres() {
+    }
+
+    function setSeriesGenres() {
+    }
+
+    async function fetchFilterSearch() {
+    }
+
+    function handleFilterSearch() {
+    }
 
     return (
         <>
             <div className="searchpage-outer-container">
-                <section className="filter-search-container">
+                <section className="filtersearch-container">
                     <div className="search-menu-container">
                         <div className="search-menu specific-search">
                             <h2>Zoeken</h2>
                             <p>Zoek hier naar een specifieke film of serie</p>
+                            <form onSubmit={handleSpecificSearch}>
+                                <Input
+                                    type="text"
+                                    id="specific-search-input"
+                                    name="specific-search"
+                                    value={specificSearch}
+                                    placeholder="Typ hier je zoekopdracht"
+                                    onChange={(e) => setSpecificSearch(e.target.value)}
+                                />
+                                <Button
+                                    type="submit"
+                                    id="specific-search-button"
+                                >
+                                    Zoek
+                                </Button>
+                            </form>
+                        </div>
+                        <div className="search-menu">
+                            <h2>Sorteren</h2>
+                        </div>
+                        <div className="search-menu searchfilter-movies-and-series">
+                            <p>Sorteer op:</p>
+                            {isMovie && sortByMovies.map((sortBy) => {
+                                return <Button
+                                    key={sortBy.string}
+                                    type="button"
+                                    name={sortOrder.includes(sortBy.string) ? "active-filter-button" : "inactive-filter-button"}
+                                    clickHandler={() => handleSortButton(sortBy.string)}
+                                >
+                                    {sortBy.name}
+                                </Button>
+                            })}
+                            {!isMovie && sortBySeries.map((sortBy) => {
+                                return <Button
+                                    key={sortBy.string}
+                                    type="button"
+                                    name={sortOrder.includes(sortBy.string) ? "active-filter-button" : "inactive-filter-button"}
+                                    clickHandler={() => handleSortButton(sortBy.string)}
+                                >
+                                    {sortBy.name}
+                                </Button>
+                            })}
+                        </div>
+                        <div className="search-menu">
+                            <h2>Filters</h2>
+                        </div>
+                        <div className="search-menu">
+                            <Button
+                                type="button"
+                                name="filter-reset-button"
+                                clickHandler={handleFilterReset}
+                            >
+                                Reset alle filters
+                            </Button>
+                        </div>
+                        <div className="search-menu searchfilter-movies-series">
+                            <Button
+                                type="radio"
+                                id="searchfilter-movies"
+                                clickHandler={handleMovieButton}
+                                name={isMovie ? "active-filter-button" : "inactive-filter-button"}
+                            >
+                                Ik zoek naar films
+                            </Button>
+                            <Button
+                                type="radio"
+                                id="searchfilter-series"
+                                clickHandler={handleSeriesButton}
+                                name={!isMovie ? "active-filter-button" : "inactive-filter-button"}
+                            >
+                                Ik zoek naar series
+                            </Button>
+                        </div>
+                        <div className="search-menu searchfilter-rating-outer-container">
+                            <p>Minimale rating:</p>
+                            <div className="searchfilter-rating-inner-container">
+                                <InputSlider
+                                    className="rating-slider"
+                                    axis="x"
+                                    x={minRating}
+                                    xstep={1}
+                                    xmax={10}
+                                    onChange={(value) => setMinRating(value.x)}
+                                    styles={{
+                                        track: {
+                                            backgroundColor: '#171517'
+                                        },
+                                        active: {
+                                            backgroundColor: '#A7EABB'
+                                        },
+                                        thumb: {
+                                            width: 20,
+                                            height: 20,
+                                            backgroundColor: '#A7EABB'
+                                        },
+                                        disabled: {
+                                            opacity: 0.5
+                                        }
+                                    }}
+                                />
+                                <p>{minRating}</p>
+                                <p>Maximale Rating:</p>
+                                <div className="rating-inner-container">
+                                    <InputSlider
+                                        axis="x"
+                                        x={maxRating}
+                                        xstep={1}
+                                        xmax={10}
+                                        onChange={(value) => setMaxRating(value.x)}
+                                        styles={{
+                                            track: {
+                                                backgroundColor: '#171517'
+                                            },
+                                            active: {
+                                                backgroundColor: '#A7EABB'
+                                            },
+                                            thumb: {
+                                                width: 20,
+                                                height: 20,
+                                                backgroundColor: '#A7EABB'
+                                            },
+                                            disabled: {
+                                                opacity: 0.5
+                                            }
+                                        }}
+                                    />
+                                    <p>{maxRating}</p>
+                                </div>
+                                {minRating > maxRating &&
+                                    <h4 className="rating-error">Maximale rating kan niet kleiner zijn dan minimale
+                                        rating
+                                        rating</h4>
+                                }
+                            </div>
+                        </div>
+                        <div className="search-menu searchfilter-genres">
+                            <p>Genres:</p>
+                            {isMovie && <section>
+                                {movieGenresIds && movieGenresIds.map((genre) => {
+                                    return <Button
+                                        key={genre.id}
+                                        type="button"
+                                        name={genresList.movieGenres.includes(genre.id) ? "active-genre-button" : "inactive-genre-button"}
+                                        clickHandler={() => setMovieGenres(genre.id)}
+                                    >
+                                        {genre.name}
+                                    </Button>
+                                })}
+                            </section>}
+                            {!isMovie && <section>
+                                {seriesGenresIds && seriesGenresIds.map((genre) => {
+                                    return <Button
+                                        key={genre.id}
+                                        type="button"
+                                        name={genresList.seriesGenres.includes(genre.id) ? "active-genre-button" : "inactive-genre-button"}
+                                        clickHandler={() => setSeriesGenres(genre.id)}
+                                    >
+                                        {genre.name}
+                                    </Button>
+                                })}
+                            </section>}
+                        </div>
+                        <div className="search-menu">
+                            <Button
+                                type="button"
+                                name="filtersearch-button"
+                                clickHandler={handleFilterSearch}
+                                disabled={minRating > maxRating}
+                            >
+                                Zoeken
+                            </Button>
                         </div>
                     </div>
-                    <div className="filter-search-results-outer-container">
+                    <div className="filtersearch-results-outer-container">
 
                     </div>
                 </section>

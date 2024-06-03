@@ -28,6 +28,7 @@ code {
     --main-theme-color-green: #006400;
     --main-theme-color-lightgrey: #EFE7E7;
 
+    --menu-bg-color: rgba(234, 167, 214, 80%);
     --main-bg-color: #171517;
     --field-bg-color: rgba(234, 167, 214, 0.75);
     --field-error-message: #750000;

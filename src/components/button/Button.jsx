@@ -7,7 +7,7 @@ import "./Button.css";
 Button.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string.isRequired,
-    clickHandler: PropTypes.func.isRequired,
+    clickHandler: PropTypes.func,
     children: PropTypes.node.isRequired,
     disabled: PropTypes.bool,
     id: PropTypes.string

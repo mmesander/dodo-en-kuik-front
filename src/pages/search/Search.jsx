@@ -94,9 +94,22 @@ function Search() {
         }
     };
 
+    // General
+    // Hier komt de useEffect
+
+    // Specific Search
+    function updateUrl() {}
 
 
-
+    // Filter Search
+    function handleSortButton() {}
+    function handleMovieButton() {}
+    function handleSeriesButton() {}
+    function handleFilterReset() {}
+    function setMovieGenres() {}
+    function setSeriesGenres() {}
+    async function fetchFilterSearch() {}
+    function handleFilterSearch() {}
 }
 
 export default Search;

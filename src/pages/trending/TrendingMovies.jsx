@@ -75,9 +75,6 @@ function TrendingMovies() {
         setLoading(false);
     }
 
-
-
-
     return (
         <>
             <div className="page-outer-container">
@@ -149,12 +146,8 @@ function TrendingMovies() {
                     </Button>
                 </div>
             </div>
-
-
         </>
-    )
-
-
+    );
 }
 
 export default TrendingMovies;

@@ -1,6 +1,6 @@
 /*General Styling*/
 
-.searchpage-outer-container {
+.search-page-outer-container {
     display: flex;
     flex-direction: row;
     min-height: calc(100vh - 160px);
@@ -8,7 +8,7 @@
     padding-block: 40px;
 }
 
-.filtersearch-container {
+.filter-search-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,8 +42,136 @@
     color: var(--main-theme-color-mint);
 }
 
+.search-menu p {
+    color: var(--main-theme-color-white);
+    font-weight: bold;
+}
+
+.specific-search {
+    margin-bottom: 10px;
+}
+
+.specific-search h2 {
+    padding-bottom: 5px;
+}
+
+#specific-search-input {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    box-shadow: none;
+    border: none;
+    outline: var(--main-theme-color-white);
+    width: 80%;
+}
+
+#specific-search-input:focus {
+    outline: 2px solid var(--main-theme-color-mint);
+}
+
+#specific-search-button {
+    width: 20%;
+    padding: 5px;
+    border-radius: 0 5px 5px 0;
+    border: none;
+    color: var(--main-theme-color-white);
+    background-color: var(--main-bg-color);
+    font-weight: bold;
+}
+
+#specific-search-button:hover {
+    color: var(--main-theme-color-mint);
+}
+
+.search-filter-movies-and-series {
+    gap: 10px;
+}
+
+.search-filter-movies-and-series button,
+.filter-reset-button {
+    padding: 5px;
+    border-radius: 14px;
+    border: 2px solid var(--main-bg-color);
+    background-color: var(--main-bg-color);
+    color: var(--main-theme-color-white);
+    font-weight: bold;
+}
+
+.search-filter-movies-and-series button:hover {
+    color: var(--main-theme-color-mint);
+}
+
+.search-filter-movies-and-series .active-filter-button {
+    border: 2px solid var(--main-theme-color-mint);
+    color: var(--main-theme-color-mint);
+}
+
+.filter-reset-button:hover {
+    border: 2px solid var(--main-theme-color-mint);
+    color: var(--main-theme-color-mint);
+}
+
+.search-filter-genres {
+    min-height: 425px;
+}
+
+.inactive-genre-button,
+.active-genre-button {
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 5px 5px 1px 0;
+    background-color: var(--main-bg-color);
+}
+
+.inactive-genre-button {
+    color: var(--main-theme-color-white);
+    border: 1px solid var(--main-bg-color);
+}
+
+.inactive-genre-button:hover {
+    color: var(--main-theme-color-mint);
+}
+
+.active-genre-button {
+    color: var(--main-theme-color-mint);
+    border: 2px solid var(--main-theme-color-mint);
+}
+
+.filter-search-button {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--main-theme-color-white);
+    background-color: var(--main-bg-color);
+    border: 2px solid var(--main-bg-color);
+    padding: 5px;
+    border-radius: 14px;
+}
+
+.filter-search-button:disabled {
+    cursor: not-allowed;
+    color: var(--field-error-message);
+    background-color: var(--main-theme-color-lightgrey);
+    border: 2px solid var(--main-theme-color-lightgrey);
+}
+
+.filter-search-button:disabled:hover {
+    color: var(--field-error-message);
+    border: 2px solid var(--main-theme-color-lightgrey);
+}
+
+.filter-search-button:hover {
+    color: var(--main-theme-color-mint);
+    border: 2px solid var(--main-theme-color-mint);
+}
+
+.rating-error {
+    color: var(--field-error-message);
+}
+
 /*Filter Search Results Styling*/
-.filtersearch-results-outer-container {
+.filter-search-results-outer-container {
     display: flex;
     flex-direction: column;
     justify-content: center;

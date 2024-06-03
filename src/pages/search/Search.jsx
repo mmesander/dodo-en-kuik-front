@@ -141,8 +141,8 @@ function Search() {
 
     return (
         <>
-            <div className="searchpage-outer-container">
-                <section className="filtersearch-container">
+            <div className="search-page-outer-container">
+                <section className="filter-search-container">
                     <div className="search-menu-container">
                         <div className="search-menu specific-search">
                             <h2>Zoeken</h2>
@@ -167,7 +167,7 @@ function Search() {
                         <div className="search-menu">
                             <h2>Sorteren</h2>
                         </div>
-                        <div className="search-menu searchfilter-movies-and-series">
+                        <div className="search-menu search-filter-movies-and-series">
                             <p>Sorteer op:</p>
                             {isMovie && sortByMovies.map((sortBy) => {
                                 return <Button
@@ -202,7 +202,7 @@ function Search() {
                                 Reset alle filters
                             </Button>
                         </div>
-                        <div className="search-menu searchfilter-movies-series">
+                        <div className="search-menu search-filter-movies-and-series">
                             <Button
                                 type="radio"
                                 id="searchfilter-movies"
@@ -220,9 +220,9 @@ function Search() {
                                 Ik zoek naar series
                             </Button>
                         </div>
-                        <div className="search-menu searchfilter-rating-outer-container">
+                        <div className="search-menu search-filter-rating-outer-container">
                             <p>Minimale rating:</p>
-                            <div className="searchfilter-rating-inner-container">
+                            <div className="search-filter-rating-inner-container">
                                 <InputSlider
                                     className="rating-slider"
                                     axis="x"
@@ -282,7 +282,7 @@ function Search() {
                                 }
                             </div>
                         </div>
-                        <div className="search-menu searchfilter-genres">
+                        <div className="search-menu search-filter-genres">
                             <p>Genres:</p>
                             {isMovie && <section>
                                 {movieGenresIds && movieGenresIds.map((genre) => {
@@ -312,7 +312,7 @@ function Search() {
                         <div className="search-menu">
                             <Button
                                 type="button"
-                                name="filtersearch-button"
+                                name="filter-search-button"
                                 clickHandler={handleFilterSearch}
                                 disabled={minRating > maxRating}
                             >
@@ -320,7 +320,7 @@ function Search() {
                             </Button>
                         </div>
                     </div>
-                    <div className="filtersearch-results-outer-container">
+                    <div className="filter-search-results-outer-container">
 
                     </div>
                 </section>

@@ -60,12 +60,8 @@ function Home() {
             setLoading(false);
         }
 
-        if (movies) {
-            void fetchMovies();
-        }
-        if (series) {
-            void fetchSeries();
-        }
+        void fetchMovies();
+        void fetchSeries();
     }, []);
 
     return (
@@ -120,7 +116,7 @@ function Home() {
                     name="inactive-home-results-button"
                     clickHandler={() => navigate("/trending-series/1")}
                 >
-                   Laat meer series zien
+                    Laat meer series zien
                 </Button>
             </div>
         </>

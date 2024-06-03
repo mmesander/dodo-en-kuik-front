@@ -10,7 +10,6 @@ import MovieCard from "../../components/moviecard/MovieCard.jsx"
 // Styles
 import "../home/Home.css"
 
-
 function TrendingSeries() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);

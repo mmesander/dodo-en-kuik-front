@@ -41,7 +41,7 @@ function SpecificSearch() {
     }, [page]);
 
     function updateUrl() {
-        const newUrl = `/zoeken/specifiek/${page}?zoekopdracht=${search}`
+        const newUrl = `/zoeken/specifiek/${page}/?zoekopdracht=${search}`
         navigate(newUrl, {replace: true})
     }
 

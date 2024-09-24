@@ -123,7 +123,7 @@ function Search() {
     }, [page, sortOrder]);
 
     function updateUrl() {
-        const newUrl = `/zoeken/filter/${page}`;
+        const newUrl = `/zoeken/overzicht/${page}`;
         navigate(newUrl, {replace: true});
     }
 

@@ -43,7 +43,7 @@ function App() {
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/trending-films/:pageId" element={<TrendingMovies/>}/>
                 <Route path="/trending-series/:pageId" element={<TrendingSeries/>}/>
-                <Route path="/zoeken/filter/:filterId" element={<Search/>}/>
+                <Route path="/zoeken/overzicht/:filterId" element={<Search/>}/>
                 <Route path="/zoeken/specifiek/:searchId" element={<SpecificSearch/>}/>
                 <Route path="/suggestie" element={<Suggestion/>}/>
                 <Route path="/lijsten" element={<Lists/>}/>

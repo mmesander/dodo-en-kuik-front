@@ -34,7 +34,7 @@ function NavBar() {
                 </li>
                 <li>
                     <NavLink
-                        to="/zoeken/filter/1"
+                        to="/zoeken/overzicht/1"
                         className={({isActive}) => isActive ? "active-nav-link" : "default-nav-link"}
                     >
                         Zoeken

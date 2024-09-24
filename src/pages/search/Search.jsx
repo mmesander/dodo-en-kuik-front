@@ -42,6 +42,9 @@ function Search() {
         seriesGenres: [],
     });
 
+    const [genreStringUrl, setGenreStringUrl] = useState("");
+    const [ratingStringUrl, setRatingStringUrl] = useState("");
+
     const movieGenresIds = [
         {name: "Actie", id: 28},
         {name: "Animatie", id: 16},
@@ -109,6 +112,17 @@ function Search() {
         }
     };
 
+    // Wat moet er gebeuren PLAN A
+    // Er worden filters geselecteerd;
+    // Vervolgens word er op zoeken geklikt
+    // Al deze parameters moeten opgeslagen worden in de URL
+    // Wanneer er naar een film wordt genavigeerd en weer terug, dan moet de fetchdata functie weer deze parameters gebruiken
+    // Daarnaast moeten de icoontjes 'active' zijn die overeenkomen met de filters die active zijn.
+
+    // Plan B
+    // Hij moet navigeren naar de filter page en dan moet de URL van deze overzicht blijven
+    // Dan hetzelfde oplossen als bij de specific search, maar dan staan de filters er niet meer, of die moeten niet meer clickable zijn en puur cosmetisch
+
     // General
     useEffect(() => {
         if (page >= 1) {
@@ -116,14 +130,16 @@ function Search() {
                 endpoint,
                 page,
                 sortOrder,
+                genreStringUrl,
+                ratingStringUrl
             );
             setFiltersActive(true);
             updateUrl();
         }
-    }, [page, sortOrder]);
+    }, [page, sortOrder, endpoint]);
 
     function updateUrl() {
-        const newUrl = `/zoeken/filter/${page}`;
+        const newUrl = `/zoeken/overzicht/${page}`;
         navigate(newUrl, {replace: true});
     }
 
@@ -195,9 +211,8 @@ function Search() {
         });
     }
 
-    async function fetchFilterSearch(endpoint, page, sortOrder) {
+    async function fetchFilterSearch(endpoint, page, sortOrder, genreString, ratingString) {
         setLoading(true);
-        const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
         try {
             const response = await axios.get(`${endpoint}+${page}${sortOrder}${ratingString}${genreString}`, options);
             if (response.data) {
@@ -213,11 +228,23 @@ function Search() {
     }
 
     function handleFilterSearch() {
-        setFiltersActive(true);
-        setPage(1);
 
-        void fetchFilterSearch(endpoint, page, sortOrder);
+        const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
+
+        const url = `/zoeken/filter/1/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&endpoint=${encodeURIComponent(endpoint)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}`;
+        navigate(`${url}`)
     }
+
+    // function handleFilterSearchOld() {
+    //     setFiltersActive(true);
+    //     setPage(1);
+    //
+    //     const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
+    //     setGenreStringUrl(genreString);
+    //     setRatingStringUrl(ratingString);
+    //
+    //     void fetchFilterSearch(endpoint, page, sortOrder, genreString, ratingString);
+    // }
 
     return (
         <>

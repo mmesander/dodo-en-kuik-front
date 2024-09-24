@@ -10,13 +10,20 @@ import MovieCard from "../../components/moviecard/MovieCard";
 // Styles
 import "./Search.css";
 
-function SpecificSearch() {
+function FilterSearch() {
     const navigate = useNavigate();
     const location = useLocation();
 
     const searchParams = new URLSearchParams(location.search);
-    const search = searchParams.get('zoekopdracht');
-    const pageNumber = useParams().searchId;
+    const pageNumber = useParams().filterId;
+    const isMovie = searchParams.get('is_movie');
+    const sortOrder = searchParams.get('sort');
+    const endpoint = searchParams.get('endpoint');
+    const rating = searchParams.get('rating');
+    const minRatingUrl = searchParams.get('min_rating');
+    const maxRatingUrl = searchParams.get('max_rating');
+    const genres = searchParams.get('genres');
+    //endpoint, page, order, ratingString,genreString
 
     const [searchResults, setSearchResults] = useState({});
     const [page, setPage] = useState(parseInt(pageNumber) || 1);
@@ -35,28 +42,28 @@ function SpecificSearch() {
 
     useEffect(() => {
         if (page >= 1) {
-            void fetchSpecificSearch(search);
+            void fetchFilterSearch(endpoint, page, sortOrder, rating, genres);
             updateUrl();
         }
     }, [page]);
 
     function updateUrl() {
-        const newUrl = `/zoeken/specifiek/${page}/?zoekopdracht=${search}`
+        const newUrl = `/zoeken/filter/${page}/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genres)}&rating=${encodeURIComponent(rating)}&sort=${encodeURIComponent(sortOrder)}&endpoint=${encodeURIComponent(endpoint)}&min_rating=${encodeURIComponent(minRatingUrl)}&max_rating=${encodeURIComponent(maxRatingUrl)}`
         navigate(newUrl, {replace: true})
     }
 
-    async function fetchSpecificSearch(search) {
+    async function fetchFilterSearch(endpoint, page, sortOrder, rating, genres) {
         setLoading(true);
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/search/multi?query=${search}&include_adult=false&language=en-US&page=${page}`, options)
+            const response = await axios.get(`${endpoint}+${page}${sortOrder}${rating}${genres}`, options);
             if (response.data) {
                 setError(false);
             }
             setSearchResults(response.data.results);
             setTotalPages(response.data.total_pages);
-        } catch (e) {
+        } catch (error) {
             setError(true);
-            console.error(e);
+            console.error(error);
         }
         setLoading(false);
     }
@@ -71,9 +78,9 @@ function SpecificSearch() {
                 Terug naar de zoekpagina
             </button>
             {Object.keys(searchResults).length > 0 &&
-                <h2 className="specific-search-title">{`Dit zijn de resultaten voor '${search}'`}</h2>}
+                <h2 className="specific-search-title">{`Dit zijn de resultaten voor de toegepaste filters:`}</h2>}
             {Object.keys(searchResults).length === 0 &&
-                <h2 className="specific-search-title">{`Er zijn geen resultaten gevonden voor '${search}'`}</h2>}
+                <h2 className="specific-search-title">{`Er zijn geen resultaten gevonden met de toegepaste filters`}</h2>}
             <div className="loading-error-section">
                 {loading && <h3 className="loading-message">Laden... </h3>}
                 {error && <h3 className="error-message">Foutmelding: Er kan geen data opgehaald worden!</h3>}
@@ -121,4 +128,4 @@ function SpecificSearch() {
     )
 }
 
-export default SpecificSearch;
+export default FilterSearch;

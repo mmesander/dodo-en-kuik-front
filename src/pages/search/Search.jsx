@@ -12,6 +12,7 @@ import MovieCard from "../../components/moviecard/MovieCard.jsx";
 // Helpers
 import createGenreArray from "../../helpers/createGenreArray.jsx";
 import createFilterStrings from "../../helpers/createFilterString.jsx";
+import extractIDs from "../../helpers/extractIDs.jsx";
 
 // Styles
 import "./Search.css"
@@ -19,6 +20,8 @@ import "./Search.css"
 function Search() {
     // General
     const navigate = useNavigate();
+    const searchParams = new URLSearchParams(location.search);
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
@@ -30,20 +33,31 @@ function Search() {
     const [specificSearch, setSpecificSearch] = useState("");
 
     // Filter Search
+    const paramIsMovie = searchParams.get("is_movie");
+    const paramSortOrder = searchParams.get("sort");
+    const paramEndpoint = searchParams.get("endpoint");
+    const paramMinRating = searchParams.get("min_rating");
+    const paramMaxRating = searchParams.get("max_rating");
+    const paramRatingString = searchParams.get("rating");
+    const paramGenreString = searchParams.get("genres");
+
+    // Indien er een genrestring in de URL staat wordt deze geinjecteerd in deze arrays, zodat deze als state toegevoegd
+    // kan worden aan de genresList state, omdat de genrestring zowel in de movie als series id's worden toegevoegd,
+    // wordt bij de useEffect een check gedaan of het een film of serie is en dan wordt de andere array leeg gemaakt.
+    const presentMoviesIds = extractIDs(paramGenreString);
+    const presentSeriesIds = extractIDs(paramGenreString);
+
     const [filtersActive, setFiltersActive] = useState(false);
     const [filterSearchResults, setFilterSearchResults] = useState({});
-    const [isMovie, setIsMovie] = useState(true);
+    const [isMovie, setIsMovie] = useState(paramIsMovie === 'true' || true);
     const [endpoint, setEndpoint] = useState('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=');
     const [minRating, setMinRating] = useState(0);
     const [maxRating, setMaxRating] = useState(10);
-    const [sortOrder, setSortOrder] = useState("&sort_by=popularity.desc");
+    const [sortOrder, setSortOrder] = useState(paramSortOrder || "&sort_by=popularity.desc");
     const [genresList, setGenresList] = useState({
-        movieGenres: [],
-        seriesGenres: [],
+        movieGenres: presentMoviesIds || [],
+        seriesGenres: presentSeriesIds || [],
     });
-
-    const [genreStringUrl, setGenreStringUrl] = useState("");
-    const [ratingStringUrl, setRatingStringUrl] = useState("");
 
     const movieGenresIds = [
         {name: "Actie", id: 28},
@@ -112,35 +126,56 @@ function Search() {
         }
     };
 
-    // Wat moet er gebeuren PLAN A
-    // Er worden filters geselecteerd;
-    // Vervolgens word er op zoeken geklikt
-    // Al deze parameters moeten opgeslagen worden in de URL
-    // Wanneer er naar een film wordt genavigeerd en weer terug, dan moet de fetchdata functie weer deze parameters gebruiken
-    // Daarnaast moeten de icoontjes 'active' zijn die overeenkomen met de filters die active zijn.
-
-    // Plan B
-    // Hij moet navigeren naar de filter page en dan moet de URL van deze overzicht blijven
-    // Dan hetzelfde oplossen als bij de specific search, maar dan staan de filters er niet meer, of die moeten niet meer clickable zijn en puur cosmetisch
-
     // General
     useEffect(() => {
         if (page >= 1) {
-            void fetchFilterSearch(
-                endpoint,
-                page,
-                sortOrder,
-                genreStringUrl,
-                ratingStringUrl
-            );
-            setFiltersActive(true);
-            updateUrl();
-        }
-    }, [page, sortOrder, endpoint]);
+            if (paramIsMovie && paramSortOrder && paramEndpoint && paramMinRating &&
+                paramMaxRating && paramRatingString && paramGenreString
+            ) {
+                // Om ervoor te zorgen dat deze ID's alleen in de juiste waarde geladen worden, staat deze handeling erin.
+                if (paramIsMovie === 'true') {
+                    setGenresList({
+                        ...genresList,
+                        seriesGenres: [],
+                    });
+                }
 
-    function updateUrl() {
-        const newUrl = `/zoeken/overzicht/${page}`;
-        navigate(newUrl, {replace: true});
+                if (paramIsMovie === 'false') {
+                    setGenresList({
+                        ...genresList,
+                        movieGenres: [],
+                    });
+                }
+
+                // De state wordt weer ingeladen via de parameters die zijn opgeslagen door de handleFilterSearch method
+                setIsMovie(paramIsMovie === 'true');
+                setMinRating(parseInt(paramMinRating));
+                setMaxRating(parseInt(paramMaxRating));
+
+                void fetchFilterSearch(paramEndpoint, page, paramSortOrder, paramGenreString, paramRatingString);
+
+                setFiltersActive(true);
+
+                updateUrl(paramIsMovie, paramGenreString, paramRatingString, paramSortOrder, paramMinRating, paramMaxRating, paramEndpoint);
+            } else {
+                // Deze is voor het basic overzicht!
+                void fetchFilterSearch(endpoint, page, sortOrder);
+
+                setFiltersActive(true);
+
+                updateUrl();
+            }
+        }
+    }, [page]);
+
+    function updateUrl(isMovie, genreString, ratingString, sortOrder, minRating, maxRating, endpoint) {
+        if (isMovie && genreString && ratingString && sortOrder && minRating && maxRating && endpoint) {
+            const newUrl = `/zoeken/overzicht/${page}/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}&endpoint=${encodeURIComponent(endpoint)}`;
+            navigate(newUrl, {replace: true});
+        } else {
+            const newUrl = `/zoeken/overzicht/${page}`;
+            navigate(newUrl, {replace: true});
+        }
     }
 
     // Specific Search
@@ -152,7 +187,6 @@ function Search() {
 
     // Filter Search
     function handleSortOrder(sortString) {
-        setPage(1);
         setSortOrder(sortString);
     }
 
@@ -162,7 +196,6 @@ function Search() {
         setFiltersActive(false);
         setMinRating(0);
         setMaxRating(10);
-        setPage(1);
         setGenresList({
             ...genresList,
             seriesGenres: [],
@@ -175,21 +208,9 @@ function Search() {
         setFiltersActive(false);
         setMinRating(0);
         setMaxRating(10);
-        setPage(1);
         setGenresList({
             ...genresList,
             movieGenres: [],
-        });
-    }
-
-    function handleFilterReset() {
-        setMinRating(0);
-        setMaxRating(10);
-        setFiltersActive(false);
-        setGenresList({
-            ...genresList,
-            movieGenres: [],
-            seriesGenres: [],
         });
     }
 
@@ -227,24 +248,29 @@ function Search() {
         setLoading(false);
     }
 
-    function handleFilterSearch() {
-
-        const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
-
-        const url = `/zoeken/filter/1/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&endpoint=${encodeURIComponent(endpoint)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}`;
-        navigate(`${url}`)
-    }
-
-    // function handleFilterSearchOld() {
-    //     setFiltersActive(true);
-    //     setPage(1);
+    // Alternatieve functie die hetzelfde werkt als de specifieke search
+    // function handleFilterSearch() {
     //
     //     const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
-    //     setGenreStringUrl(genreString);
-    //     setRatingStringUrl(ratingString);
     //
-    //     void fetchFilterSearch(endpoint, page, sortOrder, genreString, ratingString);
+    //     const url = `/zoeken/filter/1/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&endpoint=${encodeURIComponent(endpoint)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}`;
+    //     navigate(`${url}`)
     // }
+
+    // In deze functie worden de zoekfilters opgeslagen in de URL zodat deze info beschikbaar blijft indien er van deze
+    // pagina naar een andere pagina wordt genavigeerd en weer terug. Zoals wanneer er een aparte film of iets wordt
+    // aangeklikt.
+    function handleFilterSearch() {
+        setFiltersActive(true);
+        setPage(1);
+
+        const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
+        void fetchFilterSearch(endpoint, page, sortOrder, genreString, ratingString);
+
+        const newUrl = `/zoeken/overzicht/${page}/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}&endpoint=${encodeURIComponent(endpoint)}`;
+        navigate(newUrl, {replace: true});
+
+    }
 
     return (
         <>
@@ -299,15 +325,6 @@ function Search() {
                         </div>
                         <div className="search-menu">
                             <h2>Filters</h2>
-                        </div>
-                        <div className="search-menu">
-                            <Button
-                                type="button"
-                                name="filter-reset-button"
-                                clickHandler={handleFilterReset}
-                            >
-                                Reset alle filters
-                            </Button>
                         </div>
                         <div className="search-menu search-filter-movies-and-series">
                             <Button

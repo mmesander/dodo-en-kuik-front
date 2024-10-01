@@ -213,17 +213,6 @@ function Search() {
         });
     }
 
-    // function handleFilterReset() {
-    //     setMinRating(0);
-    //     setMaxRating(10);
-    //     setFiltersActive(false);
-    //     setGenresList({
-    //         ...genresList,
-    //         movieGenres: [],
-    //         seriesGenres: [],
-    //     });
-    // }
-
     function setMovieGenres(id) {
         const movieGenresArray = createGenreArray(id, genresList.movieGenres);
 
@@ -336,15 +325,6 @@ function Search() {
                         <div className="search-menu">
                             <h2>Filters</h2>
                         </div>
-                        {/*<div className="search-menu">*/}
-                        {/*    <Button*/}
-                        {/*        type="button"*/}
-                        {/*        name="filter-reset-button"*/}
-                        {/*        clickHandler={handleFilterReset}*/}
-                        {/*    >*/}
-                        {/*        Reset alle filters*/}
-                        {/*    </Button>*/}
-                        {/*</div>*/}
                         <div className="search-menu search-filter-movies-and-series">
                             <Button
                                 type="radio"

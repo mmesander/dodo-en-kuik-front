@@ -42,9 +42,6 @@ function Search() {
         seriesGenres: [],
     });
 
-    const [genreStringUrl, setGenreStringUrl] = useState("");
-    const [ratingStringUrl, setRatingStringUrl] = useState("");
-
     const movieGenresIds = [
         {name: "Actie", id: 28},
         {name: "Animatie", id: 16},
@@ -120,8 +117,7 @@ function Search() {
     // Daarnaast moeten de icoontjes 'active' zijn die overeenkomen met de filters die active zijn.
 
     // Plan B
-    // Hij moet navigeren naar de filter page en dan moet de URL van deze overzicht blijven
-    // Dan hetzelfde oplossen als bij de specific search, maar dan staan de filters er niet meer, of die moeten niet meer clickable zijn en puur cosmetisch
+    // Filters cosmetisch toevoegen aan de results page
 
     // General
     useEffect(() => {
@@ -129,9 +125,7 @@ function Search() {
             void fetchFilterSearch(
                 endpoint,
                 page,
-                sortOrder,
-                genreStringUrl,
-                ratingStringUrl
+                sortOrder
             );
             setFiltersActive(true);
             updateUrl();
@@ -234,6 +228,20 @@ function Search() {
         const url = `/zoeken/filter/1/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&endpoint=${encodeURIComponent(endpoint)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}`;
         navigate(`${url}`)
     }
+
+    // function handleFilterSearch2() {
+    //     setFiltersActive(true);
+    //     setPage(1);
+    //
+    //     const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
+    //     setGenreStringUrl(genreString);
+    //     setRatingStringUrl(ratingString);
+    //
+    //     void fetchFilterSearch(endpoint, page, sortOrder, genreString, ratingString);
+    //     const newUrl = `/zoeken/overzicht/${page}/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}`;
+    //     navigate(newUrl, {replace: true});
+    //
+    // }
 
     // function handleFilterSearchOld() {
     //     setFiltersActive(true);
@@ -420,7 +428,7 @@ function Search() {
                             <Button
                                 type="button"
                                 name="filter-search-button"
-                                clickHandler={handleFilterSearch}
+                                clickHandler={handleFilterSearch2}
                                 disabled={minRating > maxRating}
                             >
                                 Zoeken

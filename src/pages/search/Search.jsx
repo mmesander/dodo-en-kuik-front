@@ -42,7 +42,8 @@ function Search() {
     const paramGenreString = searchParams.get("genres");
 
     // Indien er een genrestring in de URL staat wordt deze geinjecteerd in deze arrays, zodat deze als state toegevoegd
-    // kan worden aan de genresList state.
+    // kan worden aan de genresList state, omdat de genrestring zowel in de movie als series id's worden toegevoegd,
+    // wordt bij de useEffect een check gedaan of het een film of serie is en dan wordt de andere array leeg gemaakt.
     const presentMoviesIds = extractIDs(paramGenreString);
     const presentSeriesIds = extractIDs(paramGenreString);
 
@@ -125,29 +126,20 @@ function Search() {
         }
     };
 
-    // Wat moet er gebeuren PLAN A
-    // Er worden filters geselecteerd;
-    // Vervolgens word er op zoeken geklikt
-    // Al deze parameters moeten opgeslagen worden in de URL
-    // Wanneer er naar een film wordt genavigeerd en weer terug, dan moet de fetchdata functie weer deze parameters gebruiken
-    // Daarnaast moeten de icoontjes 'active' zijn die overeenkomen met de filters die active zijn.
-
-    // Plan B
-    // Filters cosmetisch toevoegen aan de results page
-
     // General
     useEffect(() => {
         if (page >= 1) {
             if (paramIsMovie && paramSortOrder && paramEndpoint && paramMinRating &&
                 paramMaxRating && paramRatingString && paramGenreString
             ) {
+                // Om ervoor te zorgen dat deze ID's alleen in de juiste waarde geladen worden, staat deze handeling erin.
                 if (paramIsMovie === 'true') {
-                    // Om ervoor te zorgen dat deze ID's alleen in de juiste waarde geladen worden, staat deze handeling erin.
                     setGenresList({
                         ...genresList,
                         seriesGenres: [],
                     });
                 }
+
                 if (paramIsMovie === 'false') {
                     setGenresList({
                         ...genresList,
@@ -155,6 +147,7 @@ function Search() {
                     });
                 }
 
+                // De state wordt weer ingeladen via de parameters die zijn opgeslagen door de handleFilterSearch method
                 setIsMovie(paramIsMovie === 'true');
                 setMinRating(parseInt(paramMinRating));
                 setMaxRating(parseInt(paramMaxRating));
@@ -193,7 +186,6 @@ function Search() {
 
     // Filter Search
     function handleSortOrder(sortString) {
-        // setPage(1);
         setSortOrder(sortString);
     }
 
@@ -203,7 +195,6 @@ function Search() {
         setFiltersActive(false);
         setMinRating(0);
         setMaxRating(10);
-        // setPage(1);
         setGenresList({
             ...genresList,
             seriesGenres: [],
@@ -216,7 +207,6 @@ function Search() {
         setFiltersActive(false);
         setMinRating(0);
         setMaxRating(10);
-        // setPage(1);
         setGenresList({
             ...genresList,
             movieGenres: [],

@@ -267,8 +267,10 @@ function Search() {
     //     navigate(`${url}`)
     // }
 
-    // In deze functie worden de zoekfilters opgeslagen in de URL zodat deze info beschikbaar blijft
-    function handleFilterSearch2() {
+    // In deze functie worden de zoekfilters opgeslagen in de URL zodat deze info beschikbaar blijft indien er van deze
+    // pagina naar een andere pagina wordt genavigeerd en weer terug. Zoals wanneer er een aparte film of iets wordt
+    // aangeklikt.
+    function handleFilterSearch() {
         setFiltersActive(true);
         setPage(1);
 
@@ -454,7 +456,7 @@ function Search() {
                             <Button
                                 type="button"
                                 name="filter-search-button"
-                                clickHandler={handleFilterSearch2}
+                                clickHandler={handleFilterSearch}
                                 disabled={minRating > maxRating}
                             >
                                 Zoeken

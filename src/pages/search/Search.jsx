@@ -156,8 +156,9 @@ function Search() {
 
                 setFiltersActive(true);
 
-                updateFilterUrl(paramIsMovie, paramGenreString, paramRatingString, paramSortOrder, paramMinRating, paramMaxRating, paramEndpoint);
+                updateUrl(paramIsMovie, paramGenreString, paramRatingString, paramSortOrder, paramMinRating, paramMaxRating, paramEndpoint);
             } else {
+                // Deze is voor het basic overzicht!
                 void fetchFilterSearch(endpoint, page, sortOrder);
 
                 setFiltersActive(true);
@@ -167,14 +168,14 @@ function Search() {
         }
     }, [page]);
 
-    function updateUrl() {
-        const newUrl = `/zoeken/overzicht/${page}`;
-        navigate(newUrl, {replace: true});
-    }
-
-    function updateFilterUrl(isMovie, genreString, ratingString,sortOrder, minRating, maxRating, endpoint) {
-        const newUrl = `/zoeken/overzicht/${page}/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}&endpoint=${encodeURIComponent(endpoint)}`;
-        navigate(newUrl, {replace: true});
+    function updateUrl(isMovie, genreString, ratingString, sortOrder, minRating, maxRating, endpoint) {
+        if (isMovie && genreString && ratingString && sortOrder && minRating && maxRating && endpoint) {
+            const newUrl = `/zoeken/overzicht/${page}/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}&endpoint=${encodeURIComponent(endpoint)}`;
+            navigate(newUrl, {replace: true});
+        } else {
+            const newUrl = `/zoeken/overzicht/${page}`;
+            navigate(newUrl, {replace: true});
+        }
     }
 
     // Specific Search

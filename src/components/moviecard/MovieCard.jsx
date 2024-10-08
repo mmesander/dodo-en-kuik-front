@@ -44,10 +44,10 @@ function MovieCard({title, image, rating, id, name, isMovie}) {
 
     function clickHandler() {
         if (id && isMovie) {
-            navigate(`/film-details/${id}/${title}`);
+            navigate(`/film-details/${id}/${replaceSpaces(title)}`);
         }
         if (id && !isMovie) {
-            navigate(`/serie-details/${id}/${name}`);
+            navigate(`/serie-details/${id}/${replaceSpaces(name)}`);
         }
     }
 

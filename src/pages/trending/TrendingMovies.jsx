@@ -109,7 +109,6 @@ function TrendingMovies() {
                             image={movie.poster_path}
                             rating={movie.vote_average}
                             id={movie.id}
-                            name={movie.name}
                             isMovie={true}
                         />
                     })}
@@ -130,7 +129,7 @@ function TrendingMovies() {
                     {series && Object.keys(series).length > 0 && series.slice(0, 5).map((tv) => {
                         return <MovieCard
                             key={tv.id}
-                            title={tv.name}
+                            name={tv.name}
                             image={tv.poster_path}
                             rating={tv.vote_average}
                             id={tv.id}

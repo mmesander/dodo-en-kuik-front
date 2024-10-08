@@ -57,8 +57,8 @@ function App() {
                 <Route path="/profiel" element={<Profile/>}/>
                 <Route path="/registreren" element={<SignUp/>}/>
                 <Route path="/login" element={<SignIn/>}/>
-                <Route path="film-details/:movieId" element={<MovieDetails/>}/>
-                <Route path="serie-details/:seriesId" element={<SeriesDetails/>}/>
+                <Route path="film-details/:movieId/:movieTitle" element={<MovieDetails/>}/>
+                <Route path="serie-details/:seriesId/:seriesName" element={<SeriesDetails/>}/>
             </Routes>
             {isAuth && <Footer/>}
         </>

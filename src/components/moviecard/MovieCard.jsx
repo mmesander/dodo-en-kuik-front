@@ -8,6 +8,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Helpers
 import roundRating from "../../helpers/roundRating.jsx";
+import replaceSpaces from "../../helpers/replaceSpaces.jsx";
 
 // Assets
 import favoriteIcon from '../../assets/icons/heart-straight-fill.svg';
@@ -43,10 +44,10 @@ function MovieCard({title, image, rating, id, name, isMovie}) {
 
     function clickHandler() {
         if (id && isMovie) {
-            navigate(`/film-details/${id}`);
+            navigate(`/film-details/${id}/${replaceSpaces(title)}`);
         }
         if (id && !isMovie) {
-            navigate(`/serie-details/${id}`);
+            navigate(`/serie-details/${id}/${replaceSpaces(name)}`);
         }
     }
 
@@ -58,14 +59,14 @@ function MovieCard({title, image, rating, id, name, isMovie}) {
         >
             <div className="movie-card-container">
                 <section className="movie-card-header-section">
-                    {title && !name && <div>
+                    {title && isMovie && <div>
                         {image && <img src={`https://image.tmdb.org/t/p/w500${image}`} alt={title}/>}
                         {!image && <img src={noImage} alt="geen foto beschikbaar"/>}
                         {title.length < 40 && <h3>{title}</h3>}
                         {title.length > 40 && title.length < 60 && <h4>{title}</h4>}
                         {title.length > 60 && <h3>{title.slice(0, 40)}...</h3>}
                     </div>}
-                    {name && !title && <div>
+                    {name && !isMovie && <div>
                         {image && <img src={`https://image.tmdb.org/t/p/w500${image}`} alt={name}/>}
                         {!image && <img src={noImage} alt="geen foto beschikbaar"/>}
                         {name.length < 40 && <h3>{name}</h3>}

@@ -105,6 +105,8 @@ function Search() {
         {name: "Populariteit - Oplopend", string: "&sort_by=popularity.asc"},
         {name: "Beoordeling - Aflopend", string: "&sort_by=vote_average.desc"},
         {name: "Beoordeling - Oplopend", string: "&sort_by=vote_average.asc"},
+        {name: "Aantal stemmen - Aflopend", string: "&sort_by=vote_count.desc"},
+        {name: "Aantal stemmen - Oplopend", string: "&sort_by=vote_count.asc"},
         {name: "Verschijningsdatum - Aflopend", string: "&sort_by=primary_release_date.desc"},
         {name: "Verschijningsdatum - Oplopend", string: "&sort_by=primary_release_date.asc"},
     ];
@@ -114,6 +116,8 @@ function Search() {
         {name: "Populariteit - Oplopend", string: "&sort_by=popularity.asc"},
         {name: "Beoordeling - Aflopend", string: "&sort_by=vote_average.desc"},
         {name: "Beoordeling - Oplopend", string: "&sort_by=vote_average.asc"},
+        {name: "Aantal stemmen - Aflopend", string: "&sort_by=vote_count.desc"},
+        {name: "Aantal stemmen - Oplopend", string: "&sort_by=vote_count.asc"},
         {name: "Verschijningsdatum - Aflopend", string: "&sort_by=first_air_date.desc"},
         {name: "Verschijningsdatum - Oplopend", string: "&sort_by=first_air_date.asc"},
     ];

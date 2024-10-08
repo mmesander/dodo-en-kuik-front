@@ -8,6 +8,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Helpers
 import roundRating from "../../helpers/roundRating.jsx";
+import replaceSpaces from "../../helpers/replaceSpaces.jsx";
 
 // Assets
 import favoriteIcon from '../../assets/icons/heart-straight-fill.svg';
@@ -43,10 +44,10 @@ function MovieCard({title, image, rating, id, name, isMovie}) {
 
     function clickHandler() {
         if (id && isMovie) {
-            navigate(`/film-details/${id}`);
+            navigate(`/film-details/${id}/${title}`);
         }
         if (id && !isMovie) {
-            navigate(`/serie-details/${id}`);
+            navigate(`/serie-details/${id}/${name}`);
         }
     }
 

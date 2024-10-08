@@ -8,6 +8,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Components
 import Button from "../../components/button/Button.jsx";
+import MovieCard from "../../components/moviecard/MovieCard.jsx";
 
 // Helpers
 import formatDate from "../../helpers/formatDate.jsx";
@@ -26,23 +27,21 @@ function MovieDetails() {
     const navigate = useNavigate();
     const {movieId} = useParams();
     const {user} = useContext(AuthContext);
+    const id = parseInt(movieId);
 
     const [details, setDetails] = useState({});
     const [genres, setGenres] = useState([]);
+
     const [providers, setProviders] = useState([]);
     const [providerMessage, setProviderMessage] = useState("This movie is not available for streaming yet");
+    const [recommendations, setRecommendations] = useState([]);
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const id = parseInt(movieId);
-
-    const favoriteInitialState = user && user.favoriteMovies ? user.favoriteMovies.includes(id) : false;
-    const watchlistInitialState = user && user.watchlistMovies ? user.watchlistMovies.includes(id) : false;
-    const watchedInitialState = user && user.watchedMovies ? user.watchedMovies.includes(id) : false;
-
-    const [favoriteActive, setFavoriteActive] = useState(favoriteInitialState);
-    const [watchlistActive, setWatchlistActive] = useState(watchlistInitialState);
-    const [watchedActive, setWatchedActive] = useState(watchedInitialState);
+    const [favoriteActive, setFavoriteActive] = useState(false);
+    const [watchlistActive, setWatchlistActive] = useState(false);
+    const [watchedActive, setWatchedActive] = useState(false);
 
     const options = {
         method: 'GET',
@@ -92,9 +91,42 @@ function MovieDetails() {
             setLoading(false);
         }
 
-        void fetchMovieDetails(movieId);
-        void fetchWatchProviders(movieId);
-    }, []);
+        async function fetchRecommendations(id) {
+            try {
+                setLoading(true);
+                const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/recommendations`, options);
+                if (response.data) {
+                    setError(false);
+                }
+                setRecommendations(response.data.results);
+            } catch (error) {
+                setError(true);
+                console.error(error);
+            }
+        }
+
+        if (user && user.favoriteMovies.includes(id)) {
+            setFavoriteActive(true);
+        } else {
+            setFavoriteActive(false);
+        }
+
+        if (user && user.watchlistMovies.includes(id)) {
+            setWatchlistActive(true);
+        } else {
+            setWatchlistActive(false);
+        }
+
+        if (user && user.watchedMovies.includes(id)) {
+            setWatchedActive(true);
+        } else {
+            setWatchedActive(false);
+        }
+
+        void fetchMovieDetails(id);
+        void fetchWatchProviders(id);
+        void fetchRecommendations(id);
+    }, [id]);
 
 
     function setFavorite(id) {
@@ -278,6 +310,18 @@ function MovieDetails() {
                             Terug naar vorige pagina
                         </Button>
                     </article>
+                </div>
+                <div className="recommendations-container">
+                    {recommendations && Object.keys(recommendations).length > 0 && recommendations.map((movie) => {
+                        return <MovieCard
+                            key={movie.id}
+                            title={movie.title}
+                            image={movie.poster_path}
+                            rating={movie.vote_average}
+                            id={movie.id}
+                            isMovie={true}
+                        />
+                    })}
                 </div>
             </div>
         </>

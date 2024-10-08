@@ -177,3 +177,15 @@
     border-radius: 5px;
 }
 
+.recommendations-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 1000px;
+    max-width: 1100px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    white-space: nowrap;
+}

@@ -8,6 +8,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Components
 import Button from "../../components/button/Button.jsx"
+import MovieCard from "../../components/moviecard/MovieCard.jsx";
 
 // Helpers
 import formatDate from "../../helpers/formatDate.jsx";
@@ -26,24 +27,21 @@ function SeriesDetails() {
     const navigate = useNavigate();
     const {seriesId} = useParams();
     const {user} = useContext(AuthContext);
+    const id = parseInt(seriesId);
 
     const [details, setDetails] = useState({});
     const [genres, setGenres] = useState([]);
+
     const [providers, setProviders] = useState([]);
     const [providerMessage, setProviderMessage] = useState("This series is not available for streaming yet");
+    const [recommendations, setRecommendations] = useState([]);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const id = parseInt(seriesId);
-
-    const favoriteInitialState = user && user.favoriteSeries ? user.favoriteSeries.includes(id) : false;
-    const watchlistInitialState = user && user.watchlistSeries ? user.watchlistSeries.includes(id) : false;
-    const watchedInitialState = user && user.watchedSeries ? user.watchedSeries.includes(id) : false;
-
-    const [favoriteActive, setFavoriteActive] = useState(favoriteInitialState);
-    const [watchlistActive, setWatchlistActive] = useState(watchlistInitialState);
-    const [watchedActive, setWatchedActive] = useState(watchedInitialState);
+    const [favoriteActive, setFavoriteActive] = useState(false);
+    const [watchlistActive, setWatchlistActive] = useState(false);
+    const [watchedActive, setWatchedActive] = useState(false);
 
     const options = {
         method: 'GET',
@@ -94,9 +92,42 @@ function SeriesDetails() {
             setLoading(false);
         }
 
+        async function fetchRecommendations(id) {
+            try {
+                setLoading(true);
+                const response = await axios.get(`https://api.themoviedb.org/3/tv/${id}/recommendations`, options);
+                if (response.data) {
+                    setError(false);
+                }
+                setRecommendations(response.data.results);
+            } catch (error) {
+                setError(true);
+                console.error(error);
+            }
+        }
+
+        if (user && user.favoriteSeries.includes(id)) {
+            setFavoriteActive(true);
+        } else {
+            setFavoriteActive(false);
+        }
+
+        if (user && user.watchlistSeries.includes(id)) {
+            setWatchlistActive(true);
+        } else {
+            setWatchlistActive(false);
+        }
+
+        if (user && user.watchedSeries.includes(id)) {
+            setWatchedActive(true);
+        } else {
+            setWatchedActive(false);
+        }
+
         void fetchSeriesDetails(id);
         void fetchWatchProviders(id);
-    }, [])
+        void fetchRecommendations(id);
+    }, [id])
 
     // Clickhandlers voor de buttons/icons
     function setFavorite(id) {
@@ -285,6 +316,18 @@ function SeriesDetails() {
                             Terug naar vorige pagina
                         </Button>
                     </article>
+                </div>
+                <div className="recommendations-container">
+                    {recommendations && Object.keys(recommendations).length > 0 && recommendations.map((series) => {
+                        return <MovieCard
+                            key={series.id}
+                            name={series.name}
+                            image={series.poster_path}
+                            rating={series.vote_average}
+                            id={series.id}
+                            isMovie={false}
+                        />
+                    })}
                 </div>
             </div>
         </>

@@ -85,8 +85,6 @@ function MovieDetails() {
                         setProviderMessage("This movie is not available for streaming yet");
                     }
                 }
-
-                console.log(response.data.results);
             } catch (error) {
                 setError(true);
                 console.error(error);

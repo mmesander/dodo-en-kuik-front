@@ -62,7 +62,6 @@ function SeriesDetails() {
                 if (response.data) {
                     setError(false);
                 }
-                console.log(response.data);
                 setDetails(response.data);
                 setGenres(response.data.genres);
             } catch (error) {
@@ -88,8 +87,6 @@ function SeriesDetails() {
                         setProviderMessage("This series is not available for streaming yet");
                     }
                 }
-
-                console.log(response.data.results);
             } catch (error) {
                 setError(true);
                 console.error(error);

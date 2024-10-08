@@ -311,6 +311,11 @@ function MovieDetails() {
                         </Button>
                     </article>
                 </div>
+                <div className="recommendations-title">
+                    {recommendations.length > 0 && <h1>Vergelijkbare titels voor <span>{details.title}</span></h1>}
+                    {recommendations.length <= 0 &&
+                        <h1>Er zijn nog geen vergelijkbare films gevonden voor <span>{details.title}</span></h1>}
+                </div>
                 <div className="recommendations-container">
                     {recommendations && Object.keys(recommendations).length > 0 && recommendations.map((movie) => {
                         return <MovieCard

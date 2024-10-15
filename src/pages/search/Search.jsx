@@ -6,8 +6,8 @@ import axios from "axios";
 // Components
 import Input from "../../components/inputelements/Input.jsx";
 import Button from "../../components/button/Button.jsx";
-import InputSlider from "react-input-slider";
 import MovieCard from "../../components/moviecard/MovieCard.jsx";
+import InputSlider from "react-input-slider";
 
 // Helpers
 import createGenreArray from "../../helpers/createGenreArray.jsx";

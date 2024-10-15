@@ -33,30 +33,32 @@ function Search() {
     const [specificSearch, setSpecificSearch] = useState("");
 
     // Filter Search
-    const paramIsMovie = searchParams.get("is_movie");
-    const paramSortOrder = searchParams.get("sort");
-    const paramEndpoint = searchParams.get("endpoint");
-    const paramMinRating = searchParams.get("min_rating");
-    const paramMaxRating = searchParams.get("max_rating");
-    const paramRatingString = searchParams.get("rating");
-    const paramGenreString = searchParams.get("genres");
+    const savedFilters = {
+        isMovie: searchParams.get("is_movie") === 'true',
+        sortOrder: searchParams.get("sort"),
+        endpoint: searchParams.get("endpoint"),
+        minRating: parseInt(searchParams.get("min_rating")),
+        maxRating: parseInt(searchParams.get("max_rating")),
+        ratingString: searchParams.get("rating"),
+        genreString: searchParams.get("genres")
+    };
 
     // Indien er een genrestring in de URL staat wordt deze geinjecteerd in deze arrays, zodat deze als state toegevoegd
     // kan worden aan de genresList state, omdat de genrestring zowel in de movie als series id's worden toegevoegd,
     // wordt bij de useEffect een check gedaan of het een film of serie is en dan wordt de andere array leeg gemaakt.
-    const presentMoviesIds = extractIDs(paramGenreString);
-    const presentSeriesIds = extractIDs(paramGenreString);
+    const savedMovieGenres = extractIDs(savedFilters.genreString);
+    const savedSeriesGenres = extractIDs(savedFilters.genreString);
 
     const [filtersActive, setFiltersActive] = useState(false);
     const [filterSearchResults, setFilterSearchResults] = useState({});
-    const [isMovie, setIsMovie] = useState(paramIsMovie === 'true' || true);
+    const [isMovie, setIsMovie] = useState(savedFilters.isMovie || true);
     const [endpoint, setEndpoint] = useState('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=');
     const [minRating, setMinRating] = useState(0);
     const [maxRating, setMaxRating] = useState(10);
-    const [sortOrder, setSortOrder] = useState(paramSortOrder || "&sort_by=popularity.desc");
+    const [sortOrder, setSortOrder] = useState(savedFilters.sortOrder || "&sort_by=popularity.desc");
     const [genresList, setGenresList] = useState({
-        movieGenres: presentMoviesIds || [],
-        seriesGenres: presentSeriesIds || [],
+        movieGenres: savedMovieGenres || [],
+        seriesGenres: savedSeriesGenres || [],
     });
 
     const movieGenresIds = [
@@ -133,18 +135,23 @@ function Search() {
     // General
     useEffect(() => {
         if (page >= 1) {
-            if (paramIsMovie && paramSortOrder && paramEndpoint && paramMinRating &&
-                paramMaxRating && paramRatingString && paramGenreString
+            if (
+                savedFilters.sortOrder != null &&
+                savedFilters.endpoint != null &&
+                savedFilters.minRating != null &&
+                savedFilters.maxRating != null &&
+                savedFilters.ratingString != null &&
+                savedFilters.genreString != null
             ) {
                 // Om ervoor te zorgen dat deze ID's alleen in de juiste waarde geladen worden, staat deze handeling erin.
-                if (paramIsMovie === 'true') {
+                if (savedFilters.isMovie) {
                     setGenresList({
                         ...genresList,
                         seriesGenres: [],
                     });
                 }
 
-                if (paramIsMovie === 'false') {
+                if (!savedFilters.isMovie) {
                     setGenresList({
                         ...genresList,
                         movieGenres: [],
@@ -152,15 +159,23 @@ function Search() {
                 }
 
                 // De state wordt weer ingeladen via de parameters die zijn opgeslagen door de handleFilterSearch method
-                setIsMovie(paramIsMovie === 'true');
-                setMinRating(parseInt(paramMinRating));
-                setMaxRating(parseInt(paramMaxRating));
+                setIsMovie(savedFilters.isMovie);
+                setMinRating(savedFilters.minRating);
+                setMaxRating(savedFilters.maxRating);
 
-                void fetchFilterSearch(paramEndpoint, page, paramSortOrder, paramGenreString, paramRatingString);
+                void fetchFilterSearch(savedFilters.endpoint, page, savedFilters.sortOrder, savedFilters.genreString, savedFilters.ratingString);
 
                 setFiltersActive(true);
 
-                updateUrl(paramIsMovie, paramGenreString, paramRatingString, paramSortOrder, paramMinRating, paramMaxRating, paramEndpoint);
+                updateUrl(
+                    (savedFilters.isMovie.toString()),
+                    savedFilters.genreString,
+                    savedFilters.ratingString,
+                    savedFilters.sortOrder,
+                    (savedFilters.minRating.toString()),
+                    (savedFilters.maxRating.toString()),
+                    savedFilters.endpoint
+                );
             } else {
                 // Deze is voor het basic overzicht!
                 void fetchFilterSearch(endpoint, page, sortOrder);
@@ -198,8 +213,6 @@ function Search() {
         setEndpoint('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=');
         setIsMovie(true);
         setFiltersActive(false);
-        setMinRating(0);
-        setMaxRating(10);
         setGenresList({
             ...genresList,
             seriesGenres: [],
@@ -210,8 +223,6 @@ function Search() {
         setEndpoint('https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&page=');
         setIsMovie(false);
         setFiltersActive(false);
-        setMinRating(0);
-        setMaxRating(10);
         setGenresList({
             ...genresList,
             movieGenres: [],

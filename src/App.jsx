@@ -16,7 +16,6 @@ import TrendingSeries from "./pages/trending/TrendingSeries.jsx";
 
 import Search from "./pages/search/Search.jsx";
 import SpecificSearch from "./pages/search/SpecificSearch.jsx";
-import FilterSearch from "./pages/search/FilterSearch.jsx";
 
 import Suggestion from "./pages/suggestion/Suggestion.jsx";
 
@@ -48,7 +47,6 @@ function App() {
                 <Route path="/trending-series/:pageId" element={<TrendingSeries/>}/>
                 <Route path="/zoeken/overzicht/:filterId" element={<Search/>}/>
                 <Route path="/zoeken/specifiek/:searchId" element={<SpecificSearch/>}/>
-                <Route path="/zoeken/filter/:filterId" element={<FilterSearch/>}/>
                 <Route path="/suggestie" element={<Suggestion/>}/>
                 <Route path="/lijsten" element={<Lists/>}/>
                 <Route path="/lijsten/favorieten" element={<ListsFavorites/>}/>

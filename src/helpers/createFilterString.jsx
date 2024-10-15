@@ -8,7 +8,7 @@ function createFilterStrings(isMovie, genresList, minRating, maxRating) {
     let ratingUrlString;
 
     if (genresList[type].length === 0) {
-        genresUrlString = "";
+        genresUrlString = "&with_genres=";
     } else if (genresList[type].length === 1) {
         genresUrlString = genresString + genresList[type][0];
     } else {

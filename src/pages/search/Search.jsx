@@ -263,15 +263,6 @@ function Search() {
         setLoading(false);
     }
 
-    // Alternatieve functie die hetzelfde werkt als de specifieke search
-    // function handleFilterSearch() {
-    //
-    //     const [genreString, ratingString] = createFilterStrings(isMovie, genresList, minRating, maxRating);
-    //
-    //     const url = `/zoeken/filter/1/?is_movie=${encodeURIComponent(isMovie)}&genres=${encodeURIComponent(genreString)}&rating=${encodeURIComponent(ratingString)}&sort=${encodeURIComponent(sortOrder)}&endpoint=${encodeURIComponent(endpoint)}&min_rating=${encodeURIComponent(minRating)}&max_rating=${encodeURIComponent(maxRating)}`;
-    //     navigate(`${url}`)
-    // }
-
     // In deze functie worden de zoekfilters opgeslagen in de URL zodat deze info beschikbaar blijft indien er van deze
     // pagina naar een andere pagina wordt genavigeerd en weer terug. Zoals wanneer er een aparte film of iets wordt
     // aangeklikt.

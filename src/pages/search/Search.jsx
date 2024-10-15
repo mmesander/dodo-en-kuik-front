@@ -213,8 +213,6 @@ function Search() {
         setEndpoint('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=');
         setIsMovie(true);
         setFiltersActive(false);
-        setMinRating(0);
-        setMaxRating(10);
         setGenresList({
             ...genresList,
             seriesGenres: [],
@@ -225,8 +223,6 @@ function Search() {
         setEndpoint('https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&page=');
         setIsMovie(false);
         setFiltersActive(false);
-        setMinRating(0);
-        setMaxRating(10);
         setGenresList({
             ...genresList,
             movieGenres: [],

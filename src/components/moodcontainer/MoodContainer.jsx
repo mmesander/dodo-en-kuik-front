@@ -21,7 +21,7 @@ function MoodContainer({mood, image, imageDescription, clickHandler}) {
             >
                 <div className="mood-inner-conainter">
                     <img src={image} alt={imageDescription}/>
-                    <h4 className="mood-description">{mood}</h4>
+                    <h4>{mood}</h4>
                 </div>
             </button>
         </>

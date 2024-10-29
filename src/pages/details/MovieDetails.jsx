@@ -260,21 +260,21 @@ function MovieDetails() {
                                 <Button
                                     type="button"
                                     name={favoriteActive ? "active-favorite-button" : "inactive-favorite-button"}
-                                    clickHandler={() => setFavorite(movieId)}
+                                    onClick={() => setFavorite(movieId)}
                                 >
                                     <img src={favoriteIcon} alt="favorites-icon"/>
                                 </Button>
                                 <Button
                                     type="button"
                                     name={watchlistActive ? "active-watchlist-button" : "inactive-watchlist-button"}
-                                    clickHandler={() => setWatchlist(movieId)}
+                                    onClick={() => setWatchlist(movieId)}
                                 >
                                     <img src={watchlistIcon} alt="watchlist-icon"/>
                                 </Button>
                                 <Button
                                     type="button"
                                     name={watchedActive ? "active-watched-button" : "inactive-watched-button"}
-                                    clickHandler={() => setWatched(movieId)}
+                                    onClick={() => setWatched(movieId)}
                                 >
                                     <img src={watchedIcon} alt="watched-icon"/>
                                 </Button>
@@ -305,7 +305,7 @@ function MovieDetails() {
                         <Button
                             type="button"
                             name="back-to-previous-page"
-                            clickHandler={() => navigate(-1)}
+                            onClick={() => navigate(-1)}
                         >
                             Terug naar vorige pagina
                         </Button>

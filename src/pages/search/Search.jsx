@@ -313,7 +313,7 @@ function Search() {
                                     key={sortBy.string}
                                     type="button"
                                     name={sortOrder.includes(sortBy.string) ? "active-filter-button" : "inactive-filter-button"}
-                                    clickHandler={() => handleSortOrder(sortBy.string)}
+                                    onClick={() => handleSortOrder(sortBy.string)}
                                 >
                                     {sortBy.name}
                                 </Button>
@@ -323,7 +323,7 @@ function Search() {
                                     key={sortBy.string}
                                     type="button"
                                     name={sortOrder.includes(sortBy.string) ? "active-filter-button" : "inactive-filter-button"}
-                                    clickHandler={() => handleSortOrder(sortBy.string)}
+                                    onClick={() => handleSortOrder(sortBy.string)}
                                 >
                                     {sortBy.name}
                                 </Button>
@@ -336,7 +336,7 @@ function Search() {
                             <Button
                                 type="radio"
                                 id="searchfilter-movies"
-                                clickHandler={handleSetMovie}
+                                onClick={handleSetMovie}
                                 name={isMovie ? "active-filter-button" : "inactive-filter-button"}
                             >
                                 Ik zoek naar films
@@ -344,7 +344,7 @@ function Search() {
                             <Button
                                 type="radio"
                                 id="searchfilter-series"
-                                clickHandler={handleSetSeries}
+                                onClick={handleSetSeries}
                                 name={!isMovie ? "active-filter-button" : "inactive-filter-button"}
                             >
                                 Ik zoek naar series
@@ -420,7 +420,7 @@ function Search() {
                                         key={genre.id}
                                         type="button"
                                         name={genresList.movieGenres.includes(genre.id) ? "active-genre-button" : "inactive-genre-button"}
-                                        clickHandler={() => setMovieGenres(genre.id)}
+                                        onClick={() => setMovieGenres(genre.id)}
                                     >
                                         {genre.name}
                                     </Button>
@@ -432,7 +432,7 @@ function Search() {
                                         key={genre.id}
                                         type="button"
                                         name={genresList.seriesGenres.includes(genre.id) ? "active-genre-button" : "inactive-genre-button"}
-                                        clickHandler={() => setSeriesGenres(genre.id)}
+                                        onClick={() => setSeriesGenres(genre.id)}
                                     >
                                         {genre.name}
                                     </Button>
@@ -443,7 +443,7 @@ function Search() {
                             <Button
                                 type="button"
                                 name="filter-search-button"
-                                clickHandler={handleFilterSearch}
+                                onClick={handleFilterSearch}
                                 disabled={minRating > maxRating}
                             >
                                 Zoeken
@@ -461,14 +461,14 @@ function Search() {
                         {filtersActive && (filterSearchResults.length > 1) && <div className="button-set-page-section">
                             <Button
                                 type="button"
-                                clickHandler={() => setPage(page - 1)}
+                                onClick={() => setPage(page - 1)}
                                 disabled={page === 1}
                             >
                                 Vorige
                             </Button>
                             <Button
                                 type="button"
-                                clickHandler={() => setPage(page + 1)}
+                                onClick={() => setPage(page + 1)}
                                 disabled={page === totalPages}
                             >
                                 Volgende

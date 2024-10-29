@@ -100,7 +100,7 @@ function TrendingSeries() {
                 <Button
                     type="button"
                     name="inactive-home-results-button"
-                    clickHandler={() => navigate("/trending-films/1")}
+                    onClick={() => navigate("/trending-films/1")}
                 >
                     Laat meer films zien
                 </Button>
@@ -112,14 +112,14 @@ function TrendingSeries() {
                 <div className="button-set-page-section">
                     <Button
                         type="button"
-                        clickHandler={() => setPage(page - 1)}
+                        onClick={() => setPage(page - 1)}
                         disabled={page === 1}
                     >
                         Vorige
                     </Button>
                     <Button
                         type="button"
-                        clickHandler={() => setPage(page + 1)}
+                        onClick={() => setPage(page + 1)}
                         disabled={page === totalPages}
                     >
                         Volgende
@@ -140,7 +140,7 @@ function TrendingSeries() {
                 <Button
                     type="button"
                     name="active-home-results-button"
-                    clickHandler={() => navigate("/")}
+                    onClick={() => navigate("/")}
                 >
                     Laat minder series zien
                 </Button>

@@ -42,7 +42,7 @@ function Suggestion() {
             <div className="suggestion-page-button-container">
                 <Button
                     type="button"
-                    clickHandler={() => setIsMovie(true)}
+                    onClick={() => setIsMovie(true)}
                     disabled={isMovie}
                     name={isMovie ? "active-suggestion-button" : "inactive-suggestion-button"}
                 >
@@ -50,7 +50,7 @@ function Suggestion() {
                 </Button>
                 <Button
                     type="button"
-                    clickHandler={() => setIsMovie(false)}
+                    onClick={() => setIsMovie(false)}
                     disabled={!isMovie}
                     name={!isMovie ? "active-suggestion-button" : "inactive-suggestion-button"}
                 >

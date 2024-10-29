@@ -8,16 +8,16 @@ MoodContainer.propTypes = {
     mood: PropTypes.string,
     image: PropTypes.any,
     imageDescription: PropTypes.string,
-    clickHandler: PropTypes.func,
+    onClick: PropTypes.func,
 }
 
-function MoodContainer({mood, image, imageDescription, clickHandler}) {
+function MoodContainer({mood, image, imageDescription, onClick}) {
     return(
         <>
             <button
                 type="button"
                 className="mood-button"
-                onClick={clickHandler}
+                onClick={onClick}
             >
                 <div className="mood-inner-conainter">
                     <img src={image} alt={imageDescription}/>

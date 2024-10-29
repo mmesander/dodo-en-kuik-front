@@ -19,7 +19,7 @@ function MoodContainer({mood, image, imageDescription, onClick}) {
                 className="mood-button"
                 onClick={onClick}
             >
-                <div className="mood-inner-conainter">
+                <div className="mood-inner-container">
                     <img src={image} alt={imageDescription}/>
                     <h4>{mood}</h4>
                 </div>

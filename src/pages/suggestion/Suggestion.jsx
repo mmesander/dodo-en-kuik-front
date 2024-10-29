@@ -44,6 +44,7 @@ function Suggestion() {
                     type="button"
                     clickHandler={() => setIsMovie(true)}
                     disabled={isMovie}
+                    name={isMovie ? "active-suggestion-button" : "inactive-suggestion-button"}
                 >
                     Films
                 </Button>
@@ -51,6 +52,7 @@ function Suggestion() {
                     type="button"
                     clickHandler={() => setIsMovie(false)}
                     disabled={!isMovie}
+                    name={!isMovie ? "active-suggestion-button" : "inactive-suggestion-button"}
                 >
                     Series
                 </Button>

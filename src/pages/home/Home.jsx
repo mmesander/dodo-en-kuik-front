@@ -89,7 +89,7 @@ function Home() {
                 <Button
                     type="button"
                     name="inactive-home-results-button"
-                    clickHandler={() => navigate("/trending-films/1")}
+                    onClick={() => navigate("/trending-films/1")}
                 >
                     Laat meer films zien
                 </Button>
@@ -113,7 +113,7 @@ function Home() {
                 <Button
                     type="button"
                     name="inactive-home-results-button"
-                    clickHandler={() => navigate("/trending-series/1")}
+                    onClick={() => navigate("/trending-series/1")}
                 >
                     Laat meer series zien
                 </Button>

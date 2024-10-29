@@ -18,6 +18,7 @@ import Search from "./pages/search/Search.jsx";
 import SpecificSearch from "./pages/search/SpecificSearch.jsx";
 
 import Suggestion from "./pages/suggestion/Suggestion.jsx";
+import SpecificSuggestion from "./pages/suggestion/SpecificSuggestion.jsx"
 
 import Lists from "./pages/lists/Lists.jsx";
 import ListsFavorites from "./pages/lists/ListsFavorites.jsx";
@@ -48,6 +49,7 @@ function App() {
                 <Route path="/zoeken/overzicht/:filterId" element={<Search/>}/>
                 <Route path="/zoeken/specifiek/:searchId" element={<SpecificSearch/>}/>
                 <Route path="/suggestie" element={<Suggestion/>}/>
+                <Route path="/suggestie/:moodId/:pageId" element={<SpecificSuggestion/>}/>
                 <Route path="/lijsten" element={<Lists/>}/>
                 <Route path="/lijsten/favorieten" element={<ListsFavorites/>}/>
                 <Route path="/lijsten/watchlist" element={<ListsWatchlist/>}/>

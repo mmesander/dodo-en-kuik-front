@@ -81,14 +81,14 @@ function SpecificSearch() {
             <div className="button-set-page-section">
                 <Button
                     type="button"
-                    clickHandler={() => setPage(page - 1)}
+                    onClick={() => setPage(page - 1)}
                     disabled={page === 1}
                 >
                     Vorige
                 </Button>
                 <Button
                     type="button"
-                    clickHandler={() => setPage(page + 1)}
+                    onClick={() => setPage(page + 1)}
                     disabled={page === totalPages}
                 >
                     Volgende

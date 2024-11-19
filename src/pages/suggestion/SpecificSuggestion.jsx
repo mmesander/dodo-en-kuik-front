@@ -2,9 +2,11 @@
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import createEndpointStrings from "../../helpers/createEndpointStrings.jsx";
 
 // Components
+
+// Helpers
+import createEndpointStrings from "../../helpers/createEndpointStrings.jsx";
 
 // Styles
 
@@ -25,8 +27,6 @@ function SpecificSuggestion() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-
-
 
     const options = {
         method: 'GET',

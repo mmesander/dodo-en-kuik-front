@@ -2,6 +2,7 @@
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import createEndpointStrings from "../../helpers/createEndpointStrings.jsx";
 
 // Components
 
@@ -15,6 +16,8 @@ function SpecificSuggestion() {
     const pageNumber = useParams().pageId;
     const chosenSuggestion = useParams().moodId.toString();
     const [genre, type] = chosenSuggestion.split('-');
+
+    const [genreString, typeString] = createEndpointStrings(genre, type);
 
     const [results, setResults] = useState({});
     const [page, setPage] = useState(parseInt(pageNumber) || 1);
@@ -34,8 +37,8 @@ function SpecificSuggestion() {
     };
 
     useEffect(() => {
-        console.log(genre)
-        console.log(type)
+        console.log(genreString)
+        console.log(typeString)
     }, []);
 
     // async function fetchResults(genre, type) {

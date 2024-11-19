@@ -1,11 +1,12 @@
 // Functions
+import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 // Components
 
 // Styles
 
-import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
 
 function SpecificSuggestion() {
     const navigate = useNavigate();
@@ -23,12 +24,26 @@ function SpecificSuggestion() {
     const [error, setError] = useState(false);
 
 
+
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+        }
+    };
+
     useEffect(() => {
         console.log(genre)
         console.log(type)
     }, []);
 
-
+    // async function fetchResults(genre, type) {
+    //     setLoading(true);
+    //
+    //
+    //
+    // }
 
 }
 

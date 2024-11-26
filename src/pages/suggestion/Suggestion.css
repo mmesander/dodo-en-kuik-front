@@ -44,3 +44,13 @@
 .suggestion-page-button-container button:hover {
     color: var(--main-theme-color-pink);
 }
+
+.specific-suggestion-inner-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 1000px;
+    height: auto;
+    flex-wrap: wrap;
+    margin-inline: 30px
+}

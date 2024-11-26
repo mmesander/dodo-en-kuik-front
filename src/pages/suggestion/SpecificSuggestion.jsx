@@ -1,15 +1,17 @@
 // Functions
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
 // Components
+import MovieCard from "../../components/moviecard/MovieCard";
 
 // Helpers
 import createEndpointStrings from "../../helpers/createEndpointStrings.jsx";
 
 // Styles
 import "./Suggestion.css"
+import Button from "../../components/button/Button.jsx";
 
 function SpecificSuggestion() {
     const navigate = useNavigate();
@@ -38,6 +40,8 @@ function SpecificSuggestion() {
     useEffect(() => {
         if (page >= 1) {
             void fetchResults(genreString, typeString);
+            console.log(results)
+            console.log(type)
             updateUrl();
         }
     }, [page]);
@@ -73,6 +77,49 @@ function SpecificSuggestion() {
                 Terug naar de zoekpagina
             </button>
             <h2 className="suggestion-title">Je hebt gekozen voor <span>{genre} {type}</span></h2>
+            <div className="loading-error-section">
+                {loading && <h3 className="loading-message">Laden... </h3>}
+                {error && <h3 className="error-message">Foutmelding: Er kan geen data opgehaald worden!</h3>}
+            </div>
+            <div className="button-set-page-section">
+                <Button
+                    type="button"
+                    onClick={() => setPage(page - 1)}
+                    disabled={page === 1}
+                >
+                    Vorige
+                </Button>
+                <Button
+                    type="button"
+                    onClick={() => setPage(page + 1)}
+                    disabled={page === totalPages}
+                >
+                    Volgende
+                </Button>
+                <div className="specific-suggestion-inner-container">
+                    {Object.keys(results).length > 0 && results.map((result) => {
+                        if (type === "films") {
+                            return <MovieCard
+                                key={result.id}
+                                title={result.title}
+                                image={result.poster_path}
+                                rating={result.vote_average}
+                                id={result.id}
+                                isMovie={true}
+                            />
+                        } else if (type === "series") {
+                            return <MovieCard
+                                key={result.id}
+                                name={result.name}
+                                image={result.poster_path}
+                                rating={result.vote_average}
+                                id={result.id}
+                                isMovie={false}
+                            />
+                        }
+                    })}
+                </div>
+            </div>
         </div>
     );
 

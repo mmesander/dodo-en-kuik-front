@@ -7,12 +7,12 @@ function createEndpointStrings(genre, type) {
             if (type === "films") {
                 // + Komedie
                 // -
-                genreString = "&with_genres=35";
-                typeString = "movies";
+                genreString = "35";
+                typeString = "movie";
             } else {
                 // + Komedie
                 // -
-                genreString = "&with_genres=35";
+                genreString = "35";
                 typeString = "tv";
             }
             break;
@@ -20,12 +20,12 @@ function createEndpointStrings(genre, type) {
             if (type === "films") {
                 // + Misdaad, Actie, Thriller
                 // - Komedie
-                genreString = "&with_genres=80%7C28%7C53&without_genres=35";
-                typeString = "movies";
+                genreString = "80%7C28%7C53&without_genres=35";
+                typeString = "movie";
             } else {
                 // + Misdaad, Actie & Avontuur
                 // - Komedie
-                genreString = "&with_genres=80%7C10759&without_genres=35";
+                genreString = "80%7C10759&without_genres=35";
                 typeString = "tv";
             }
             break;
@@ -33,12 +33,12 @@ function createEndpointStrings(genre, type) {
             if (type === "films") {
                 // + Horror
                 // - Komedie, Familie, Animatie
-                genreString = "&with_genres=27&without_genres=35%7C10751%7C16";
-                typeString = "movies";
+                genreString = "27&without_genres=35%7C10751%7C16";
+                typeString = "movie";
             } else {
                 // + Mysterie, Sci-Fi & Fantasy, Drama
                 // - Animatie, Comedy, Kids, Familie
-                genreString = "&with_genres=9648%7C10765%7C18&without_genres=16%7C35%7C10762%7C10751";
+                genreString = "9648%7C10765%7C18&without_genres=16%7C35%7C10762%7C10751";
                 typeString = "tv";
             }
             break;
@@ -46,12 +46,12 @@ function createEndpointStrings(genre, type) {
             if (type === "films") {
                 // + Fantasie, Sciencefiction
                 // - Horror
-                genreString = "&with_genres=14%7C878&without_genres=27";
-                typeString = "movies";
+                genreString = "14%7C878&without_genres=27";
+                typeString = "movie";
             } else {
                 // + Sci-Fi & Fantasy
                 // - Animatie, Kids
-                genreString = "&with_genres=10765&without_genres=16%7C10762";
+                genreString = "10765&without_genres=16%7C10762";
                 typeString = "tv";
             }
             break;
@@ -59,12 +59,12 @@ function createEndpointStrings(genre, type) {
             if (type === "films") {
                 // + Drama, Romantiek
                 // - Horror
-                genreString = "&with_genres=18%7C10749&without_genres=27";
-                typeString = "movies";
+                genreString = "18%7C10749&without_genres=27";
+                typeString = "movie";
             } else {
                 // + Drama
                 // -
-                genreString = "&with_genres=18";
+                genreString = "18";
                 typeString = "tv";
             }
             break;

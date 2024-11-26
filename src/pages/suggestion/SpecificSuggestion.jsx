@@ -48,6 +48,11 @@ function SpecificSuggestion() {
     //
     // }
 
+    function updateUrl() {
+        const newUrl = `/suggestie/${chosenSuggestion}/${page}`;
+        navigate(newUrl, {replace: true});
+    }
+
 }
 
 export default SpecificSuggestion;

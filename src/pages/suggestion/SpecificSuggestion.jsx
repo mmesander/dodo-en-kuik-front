@@ -96,29 +96,29 @@ function SpecificSuggestion() {
                 >
                     Volgende
                 </Button>
-                <div className="specific-suggestion-inner-container">
-                    {Object.keys(results).length > 0 && results.map((result) => {
-                        if (type === "films") {
-                            return <MovieCard
-                                key={result.id}
-                                title={result.title}
-                                image={result.poster_path}
-                                rating={result.vote_average}
-                                id={result.id}
-                                isMovie={true}
-                            />
-                        } else if (type === "series") {
-                            return <MovieCard
-                                key={result.id}
-                                name={result.name}
-                                image={result.poster_path}
-                                rating={result.vote_average}
-                                id={result.id}
-                                isMovie={false}
-                            />
-                        }
-                    })}
-                </div>
+            </div>
+            <div className="specific-suggestion-inner-container">
+                {Object.keys(results).length > 0 && results.map((result) => {
+                    if (type === "films") {
+                        return <MovieCard
+                            key={result.id}
+                            title={result.title}
+                            image={result.poster_path}
+                            rating={result.vote_average}
+                            id={result.id}
+                            isMovie={true}
+                        />
+                    } else if (type === "series") {
+                        return <MovieCard
+                            key={result.id}
+                            name={result.name}
+                            image={result.poster_path}
+                            rating={result.vote_average}
+                            id={result.id}
+                            isMovie={false}
+                        />
+                    }
+                })}
             </div>
         </div>
     );

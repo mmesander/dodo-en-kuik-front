@@ -4,6 +4,10 @@
     font-size: 40px;
 }
 
+.suggestion-title span {
+    color: var(--main-theme-color-pink);
+}
+
 .suggestion-page-mood-container {
     display: flex;
     flex-direction: row;
